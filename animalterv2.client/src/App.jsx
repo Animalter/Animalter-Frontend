@@ -14,6 +14,7 @@ import SearchResult from './pages/SearchResult';
 import UserProfile from './pages/UserProfile';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import FAQPage from './pages/FAQPage';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
             <Header/>
 
             <Routes>
+                
                 <Route path="/" element={<HomePage/>} />
                 <Route path="/explorer" element={<ExplorerPage/>} />
                 <Route path="/about" element={<AboutPage/>} />
@@ -32,8 +34,8 @@ function App() {
                 <Route path="/search/:query" element={<SearchResult/>} />
                 <Route path="/user/:id" element={<UserProfile/>} />
                 <Route path="/login" element={<LoginPage/>} />
-                <Route path="/register" element={<RegisterPage/>} />
-                
+                <Route path="/register" element={<RegisterPage/>} />   
+                <Route path="/faq" element={<FAQPage/>} />
 
             </Routes>
 
