@@ -12,6 +12,7 @@ export default {
     backgroundImage: {
       'hero-section': "url('./src/assets/herobanner-bg.jpg')",
       'filter-field': "url('./src/assets/filterfield-bg.jpg')",
+      'login-register-bg':"url('./src/assets/login-register-bg.jpeg')",
     },
     height:{
       '112':'28rem',

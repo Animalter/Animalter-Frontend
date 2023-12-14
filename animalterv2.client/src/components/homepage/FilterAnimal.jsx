@@ -30,7 +30,7 @@ const FilterAnimal = () => {
       
      <h2 className='text-xl text-white underline underline-offset-8 font-semibold '>Detailed Search</h2>
 
-     <form action="" onSubmit={()=>handleSubmit(e)} className='flex flex-col items-end w-1/3 mt-20'>
+     <form action="" onSubmit={(e)=>handleSubmit(e)} className='flex flex-col items-end w-1/3 mt-20'>
 
       <div className='mb-6 flex gap-5'>
         <label htmlFor={id+'name'} className='font-bold text-white '>Name</label>

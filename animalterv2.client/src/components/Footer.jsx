@@ -17,7 +17,7 @@ const Footer = () => {
         <h3 className='font-bold text-lg mb-3'>Follow Us</h3>
 
         <div className='flex justify-between'>
-          <i className="fa-brands fa-facebook text-2xl hover:text-blue-500"></i>
+          <i className="fa-brands fa-facebook text-2xl hover:text-blue-400"></i>
           <i className="fa-brands fa-twitter text-2xl hover:text-cyan-500"></i>
         </div>
 
