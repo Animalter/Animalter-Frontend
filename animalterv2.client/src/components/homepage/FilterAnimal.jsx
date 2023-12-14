@@ -10,7 +10,7 @@ const FilterAnimal = () => {
 
   const handleSubmit=async(e)=>{
 
-    //e.preventDefault();
+    e.preventDefault();
 
     const name=e.target[0].value;
     filters.push(name);
@@ -21,7 +21,7 @@ const FilterAnimal = () => {
     const age=await e.target[3].value;
     filters.push(age);
 
-    //navigate("/search/result") 
+    navigate("/search/result") 
 
   }
 

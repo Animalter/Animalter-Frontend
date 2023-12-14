@@ -8,7 +8,7 @@ const Footer = () => {
 
         <h3 className='font-bold text-lg mb-3'>Animalter</h3>
 
-        <p className='underline mb-2'>Privacy Police</p>
+        <p className='underline mb-2 cursor-pointer'>Privacy Police</p>
         <p>@copyright 2023, Tüm Hakları Saklıdır</p>
 
       </div>

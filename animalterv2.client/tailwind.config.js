@@ -16,6 +16,7 @@ export default {
     height:{
       '112':'28rem',
       '128':'32rem',
+      '156':'39rem',
     },
     width:{
       '7/20':'35%',//remove 
@@ -30,6 +31,8 @@ export default {
       '2xl':'1460px'
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar')({ nocompatible: true }),
+  ],
 }
 

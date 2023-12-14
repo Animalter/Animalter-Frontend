@@ -8,6 +8,8 @@ const ExplorerPage = () => {
 
   return (
     <div className='my-8 px-8'>
+
+      <h1 className='font-bold text-xl mb-8'>Explore New Friends</h1>
       {
         
         //explorerAnimals.map((animal)=>(
