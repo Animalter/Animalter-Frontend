@@ -8,7 +8,26 @@ export default {
     extend: {
       fontFamily: { 
         "ubuntu": ['Ubuntu', 'sans-serif'] 
+    },
+    backgroundImage: {
+      'hero-section': "url('./src/assets/herobanner-bg.jpg')",
+      'filter-field': "url('./src/assets/filterfield-bg.jpg')",
+    },
+    height:{
+      '112':'28rem',
+      '128':'32rem',
+    },
+    width:{
+      '7/20':'35%',//remove 
     } 
+    },
+    screens: {
+      'xs': '320px',
+      'sm': '540px', 
+      'md': '720px',
+      'lg': '920px',
+      'xl': '1040px',
+      '2xl':'1460px'
     },
   },
   plugins: [],

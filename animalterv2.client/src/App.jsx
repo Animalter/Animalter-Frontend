@@ -18,6 +18,9 @@ import FAQPage from './pages/FAQPage';
 
 function App() {
 
+    //container structure ?
+    //responsive design
+
     return (
         <div>
             <Header/>
@@ -28,10 +31,10 @@ function App() {
                 <Route path="/explorer" element={<ExplorerPage/>} />
                 <Route path="/about" element={<AboutPage/>} />
                 <Route path="/contact" element={<ContactPage/>} />
-                <Route path="/:animaltype/:id" element={<AnimalDetailsPage/>} />
-                <Route path="/:animaltype" element={<AnimalType/>} />
+                <Route path="/animal/:animaltype/:id" element={<AnimalDetailsPage/>} />
+                <Route path="/animal/:animaltype" element={<AnimalType/>} />
                 <Route path="/admin/:id" element={<AdminPanel/>} />
-                <Route path="/search/:query" element={<SearchResult/>} />
+                <Route path="/search/:filter" element={<SearchResult/>} />
                 <Route path="/user/:id" element={<UserProfile/>} />
                 <Route path="/login" element={<LoginPage/>} />
                 <Route path="/register" element={<RegisterPage/>} />   

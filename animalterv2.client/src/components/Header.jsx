@@ -18,13 +18,13 @@ const Header = () => {
 
       <nav className='flex gap-5'>
 
-        <NavLink to="/dog" className={({ isActive }) => isActive ? 'text-black ' : ''}>Dog</NavLink>
-        <NavLink to="/cat" className={({ isActive }) => isActive ? 'text-black ' : ''}>Cat</NavLink>
-        <NavLink to="/bird" className={({ isActive }) => isActive ? 'text-black ' : ''}>Bird</NavLink> 
-        <NavLink to="/about" className={({ isActive }) => isActive ? 'text-black' : ''}>About</NavLink>
-        <NavLink to="/contact" className={({ isActive }) => isActive ? 'text-black' : ''}>Contact</NavLink>
-        <NavLink to="/faq" className={({ isActive }) => isActive ? 'text-black ' : ''}>FAQ</NavLink>
-        <NavLink to="/login" className={({ isActive }) => isActive ? 'text-black ' : ''}>Login</NavLink>      
+        <NavLink to="animal/dog" className={({ isActive }) => isActive ? 'text-black ' : 'hover:underline underline-offset-4'}>Dog</NavLink>
+        <NavLink to="animal/cat" className={({ isActive }) => isActive ? 'text-black ' : 'hover:underline underline-offset-4'}>Cat</NavLink>
+        <NavLink to="animal/bird" className={({ isActive }) => isActive ? 'text-black ' : 'hover:underline underline-offset-4'}>Bird</NavLink> 
+        <NavLink to="/about" className={({ isActive }) => isActive ? 'text-black' : 'hover:underline underline-offset-4'}>About</NavLink>
+        <NavLink to="/contact" className={({ isActive }) => isActive ? 'text-black' : 'hover:underline underline-offset-4'}>Contact</NavLink>
+        <NavLink to="/faq" className={({ isActive }) => isActive ? 'text-black ' : 'hover:underline underline-offset-4'}>FAQ</NavLink>
+        <NavLink to="/login" className={({ isActive }) => isActive ? 'text-black ' : 'hover:underline underline-offset-4'}>Login</NavLink>      
 
       </nav>
 
