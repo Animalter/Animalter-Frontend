@@ -1,6 +1,8 @@
 import React, { useId } from 'react'
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import axios from "axios";
 
 const RegisterPage = () => {
 
@@ -8,22 +10,51 @@ const RegisterPage = () => {
 
   const navigate=useNavigate();
 
-  const info=[];
+  const [name,setName]=useState("");
+  const [password,setPassword]=useState("");
+  const [email,setEmail]=useState("");
+  const [phone,setPhone]=useState("");
+
+  const changeName=(value)=>{
+
+    setName(value);
+
+  }
+
+  const changePassword=(value)=>{
+
+    setPassword(value);
+
+  }
+
+  
+  const changeEmail=(value)=>{
+
+    setEmail(value);
+
+  }
+
+  const changePhone=(value)=>{
+
+    setPhone(value);
+
+  }
 
   const register=(e)=>{
 
-    e.preventDefault();
-
-    const name=e.target[0].value;
-    info.push(name);
-    const password=e.target[1].value;
-    info.push(password);
-    const mail=e.target[2].value;
-    info.push(mail);
-    const phone=e.target[3].value;
-    info.push(phone);
-
-    navigate("/");
+    const data={
+      Name:name,
+      Password:password,
+      Email:email,
+      Phone:phone,
+    }
+    const url="/";
+    axios.post(url,data).then(()=>{
+      navigate("/");
+    }).catch((err)=>{
+      console.log(err);
+    });
+  
 
   }
 
@@ -36,13 +67,13 @@ const RegisterPage = () => {
 
       <form action="" onSubmit={(e)=>register(e)} className='flex flex-col gap-3'>
             
-        <input type="text" id={id+'name'} placeholder='Enter Your Name' className='px-3 py-1 rounded-full border border-black outline-none'/>          
+        <input type="text" id={id+'name'} value={name} onChange={(e)=>changeName(e.target.value)} placeholder='Enter Your Name' className='px-3 py-1 rounded-full border border-black outline-none'/>          
                        
-        <input type="password" name="" id={id+'password'} placeholder='Enter Your Password' className='px-3 py-1 rounded-full border border-black outline-none' />
+        <input type="password" name="" id={id+'password'} value={password} onChange={(e)=>changePassword(e.target.value)} placeholder='Enter Your Password' className='px-3 py-1 rounded-full border border-black outline-none' />
 
-        <input type="email" id={id+'mail'} placeholder='Enter Your Email' className='px-3 py-1 rounded-full border border-black outline-none'/>
+        <input type="email" id={id+'mail'} value={email} onChange={(e)=>changeEmail(e.target.value)} placeholder='Enter Your Email' className='px-3 py-1 rounded-full border border-black outline-none'/>
 
-        <input type="tel" id={id+'phone'} pattern='[0]{1}[5]{1}[0-9]{9}' placeholder='Enter Your Phone Number' className='px-3 py-1 rounded-full border border-black outline-none'/>
+        <input type="tel" id={id+'phone'} value={phone} onChange={(e)=>changePhone(e.target.value)} pattern='[0]{1}[5]{1}[0-9]{9}' placeholder='Enter Your Phone Number' className='px-3 py-1 rounded-full border border-black outline-none'/>
 
         <button className='w-full p-2 rounded-full text-white bg-[#009D69] border border-white hover:border-[#009D69]'>Register</button>
 

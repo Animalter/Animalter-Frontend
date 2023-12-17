@@ -1,4 +1,4 @@
-import React, { useId } from 'react'
+import React, { useId, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -8,18 +8,34 @@ const LoginPage = () => {
 
   const navigate=useNavigate();
 
-  const info=[];
+  const [name,setName]=useState("");
+  const [password,setPassword]=useState("");
+  
+
+  const changeName=(value)=>{
+
+    setName(value);
+
+  }
+
+  const changePassword=(value)=>{
+
+    setPassword(value);
+
+  }
 
   const login=(e)=>{
 
-    e.preventDefault();
-
-    const name=e.target[0].value;
-    info.push(name);
-    const password=e.target[1].value;
-    info.push(password);
-
-    navigate("/");
+    const data={
+      Name:name,
+      Password:password,
+    }
+    const url="/";
+    axios.post(url,data).then(()=>{
+      navigate("/");
+    }).catch((err)=>{
+      console.log(err);
+    });
 
   }
 
@@ -32,9 +48,9 @@ const LoginPage = () => {
 
         <form action="" onSubmit={(e)=>login(e)} className='flex flex-col gap-3'>
               
-          <input type="text" id={id+'name'} placeholder='Enter Your Name' className='px-3 py-1 rounded-full border border-black outline-none'/>          
+          <input type="text" id={id+'name'} value={name} onChange={(e)=>changeName(e.target.value)} placeholder='Enter Your Name' className='px-3 py-1 rounded-full border border-black outline-none'/>          
                          
-          <input type="password" name="" id={id+'password'} placeholder='Enter Your Password' className='px-3 py-1 rounded-full border border-black outline-none' />
+          <input type="password" name="" id={id+'password'} value={password} onChange={(e)=>changePassword(e.target.value)}  placeholder='Enter Your Password' className='px-3 py-1 rounded-full border border-black outline-none' />
 
           <button className='w-full p-2 rounded-full text-white bg-[#009D69] border border-white hover:border-[#009D69]'>Login</button>
 
