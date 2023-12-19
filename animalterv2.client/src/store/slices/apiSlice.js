@@ -29,4 +29,4 @@ export const {
   useGetArtistDetailsQuery,
   useGetSongDetailsQuery,
   useGetSongRelatedQuery,
-} = shazamCoreApi;
+} = animalApi;

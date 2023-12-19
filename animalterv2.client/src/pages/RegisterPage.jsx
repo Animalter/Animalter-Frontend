@@ -15,30 +15,13 @@ const RegisterPage = () => {
   const [email,setEmail]=useState("");
   const [phone,setPhone]=useState("");
 
-  const changeName=(value)=>{
+  const changeName=(value)=>{  setName(value);  }
 
-    setName(value);
-
-  }
-
-  const changePassword=(value)=>{
-
-    setPassword(value);
-
-  }
-
+  const changePassword=(value)=>{  setPassword(value);  }
   
-  const changeEmail=(value)=>{
+  const changeEmail=(value)=>{  setEmail(value);  }
 
-    setEmail(value);
-
-  }
-
-  const changePhone=(value)=>{
-
-    setPhone(value);
-
-  }
+  const changePhone=(value)=>{  setPhone(value);  }
 
   const register=(e)=>{
 

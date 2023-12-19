@@ -1,13 +1,16 @@
 import React, { useId, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const UserProfile = () => {
 
-  //delete profile
+  //logout function
+  //state'de prev kullanımı
+  //use toast for update notification
   
-
-  const [showPopup,setShowPopup]=useState(false);
-  const [updateMessage,setUpdateMessage]=useState("");
+  const [showForm,setShowForm]=useState(false);
+  const [deleteSection,setDeleteSection]=useState(false);
+  console.log(deleteSection);
 
   const id=useId();
   const navigate=useNavigate();
@@ -17,71 +20,48 @@ const UserProfile = () => {
   const [email,setEmail]=useState("");
   const [phone,setPhone]=useState("");
 
-  const changeName=(value)=>{
+  const changeName=(value)=>{ setName(value);  }
 
-    setName(value);
-
-  }
-
-  const changePassword=(value)=>{
-
-    setPassword(value);
-
-  }
-
+  const changePassword=(value)=>{  setPassword(value);  }
   
-  const changeEmail=(value)=>{
+  const changeEmail=(value)=>{  setEmail(value);  }
 
-    setEmail(value);
+  const changePhone=(value)=>{  setPhone(value);  }
 
-  }
-
-  const changePhone=(value)=>{
-
-    setPhone(value);
-
-  }
-
-  const editProfile=(e)=>{
+  const editProfile=(id)=>{
 
     const data={
+      Id:id,
       Name:name,
       Password:password,
       Email:email,
       Phone:phone,
     }
-    const url="/";
-    axios.post(url,data).then(()=>{
-      setUpdateMessage("Profile Updated");
-
-      const timer=setTimeout(()=>{
-
-        setUpdateMessage("");
-      },5000);
-
-    }).catch((err)=>{
-      console.log(err);
-    });
-
-  }
-
-  const deleteProfile=()=>{
-
-    const data={
-      Name:name,
-      Password:password,
-      Email:email,
-      Phone:phone,
-    }
-    const url="/";
-    axios.post(url,data).then(()=>{
+    const url=`/url/${id}`;
+    axios.put(url,data).then(()=>{
       
-      navigate("/");
+      //success message     
 
     }).catch((err)=>{
       console.log(err);
     });
 
+  }
+
+  const deleteProfile=(id)=>{
+
+    axios.delete(`/url/${id}`).then((res)=>{
+      
+      if(res.status===200)  navigate("/");
+
+    }).catch((err)=>{
+      console.log(err);
+    });
+
+  }
+
+  const logout=()=>{
+    
   }
 
   const adoptedAnimals=[];
@@ -95,10 +75,10 @@ const UserProfile = () => {
                     
           <h1 className='font-bold text-3xl '>Profile Info</h1>
 
-          <div className='flex gap-3'>
-            <i className={`fa-solid ${showPopup ? 'fa-x':'fa-pen'}`} onClick={()=>setShowPopup(!showPopup)}></i>
-            <i class="fa-solid fa-trash"></i>
-
+          <div className='flex gap-3 items-center'>
+            <i className={`fa-solid ${showForm ? 'fa-x':'fa-pen'}`} onClick={()=>{setShowForm(!showForm); setDeleteSection(false);}}></i>
+            <i className={`fa-solid ${deleteSection ? 'fa-x':'fa-trash'}`} onClick={()=>{setDeleteSection(!deleteSection); setShowForm(false);}}></i>
+            <i class="fa-solid fa-right-from-bracket text-white p-1 rounded-lg bg-red-500" onClick={logout}></i>
           </div>
           
           
@@ -114,7 +94,7 @@ const UserProfile = () => {
 
         </div>
 
-        {showPopup && (
+        {showForm && (
 
         <div className='mt-12'>          
 
@@ -128,21 +108,24 @@ const UserProfile = () => {
        
             <input type="tel" id={id+'phone'} value={phone} onChange={(e)=>changePhone(e.target.value)} pattern='[0]{1}[5]{1}[0-9]{9}' placeholder='Enter Your Phone Number' className='px-3 py-1 rounded-full border border-black outline-none'/>
        
-            <button className='w-full p-2 rounded-full text-white bg-[#009D69] border border-white hover:border-[#009D69]'>Update</button>               
+            <button onClick={()=>editProfile("id")} className='w-full p-2 rounded-full text-white bg-[#009D69] border border-white hover:border-[#009D69]'>Update</button>               
 
           </form>
 
-          {updateMessage && (
-
-            <div>
-              <p>{updateMessage}</p>
-
-            </div>
-          )}
-
-          </div>
+        </div>
 
         )} 
+
+        {deleteSection && (
+            
+          <div>
+
+            <p className='font-bold mt-12 text-center mb-5'>Are You Sure Delete This Profile</p>
+
+            <button onClick={()=>deleteProfile("id")} className='w-full p-2 rounded-full text-white bg-[#FF566A] border border-white hover:border-[#FF566A]'>Delete</button>
+
+          </div>
+        )}
 
       </div>
 

@@ -9,6 +9,7 @@ const AnimalType = () => {
   const animalsbygenus=[];
 
   //carousel
+  //data boyutuna göre infinite scroll kullanılabilir
 
   return (
     <div className='p-8 '>

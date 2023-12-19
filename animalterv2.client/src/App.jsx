@@ -20,6 +20,8 @@ function App() {
 
     //container structure ?
     //responsive design
+    //işlemlerden sonra popup ile bilgi verilmesi (toastify kullanılabilir)
+    //middleware için ne yapılmalı
 
     return (
         <div>
