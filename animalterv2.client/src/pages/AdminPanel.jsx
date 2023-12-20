@@ -2,21 +2,20 @@ import React, { useEffect, useId, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import Select from "react-select"
+import { useCookies } from 'react-cookie';
 
 const AdminPanel = () => {
- 
-  //file tipinde input ve verinin usestate'de kalması ?
-  //edit ile gelen resmin popup'da gösterilmesi
-  //useMemo kullanımı (infinite scroll'a gerek var mı)
-  //delete için forma gerek var mı ayrı bir popup yapılabilir mi ?
+  
 
   const id=useId();
   const navigate=useNavigate();
+  const [cookie,setCookie]=useCookies(['role']);
 
   const [selectedTab,setSelectedTab]=useState("animal");
   const [operationType,setOperationType]=useState("animal");
   const [showPopup,setShowPopup]=useState(false);
   const [selectedId,setSelectedId]=useState("");
+  const [adoptFilter,setAdoptFilter]=useState("");
   const [data,setData]=useState();
 
   const [name,setName]=useState("");
@@ -214,6 +213,12 @@ const AdminPanel = () => {
   
   };
 
+  const onChangeFilter = (selectedOption) => {
+ 
+    setAdoptFilter(selectedOption.value);  
+  
+  };
+
 
   const changeOperation=(value)=>{
 
@@ -221,17 +226,26 @@ const AdminPanel = () => {
   }
 
   useEffect(()=>{
-    showData();
+
+    if(cookie.role && cookie.role=="admin") showData();
+    else navigate("/login");
   },[])
 
   useEffect(()=>{
 
     showData();
-    //useMemo kullan
+    setSelectedId("");
+    resetStates();
 
   },[selectedTab])
-  
 
+  useEffect(()=>{
+
+    //if(adoptFilter) data.filter((element)=>{element.adoptstate==adoptFilter})
+
+  },[adoptFilter])
+  
+  
 
   return (
     <div className='relative h-screen my-6'>
@@ -295,7 +309,7 @@ const AdminPanel = () => {
             
             <input required style={{ display: "none" }} type="file" id={id+'image'} value={image} onChange={(e)=>changeImage(e.target.value)} placeholder="Enter Animal's Image" />
             <label htmlFor={id+'image'} className='flex gap-3 items-center '>
-              <i class="fa-solid fa-images text-3xl"></i>
+              <i className="fa-solid fa-images text-3xl"></i>
               <span className='font-semibold'>Update Photo</span>
             </label>
           
@@ -358,11 +372,11 @@ const AdminPanel = () => {
 
             <Select name="adopt" value={adoptState} options={adoptStates} getOptionLabel={(option) => option.label} 
                     getOptionValue={(option) => option.value}  onChange={onChange} placeholder={adoptState || "Select State"} 
-                    className="xs:w-1/2 lg:w-48 text-black rounded-lg"/>
+                    className="xs:w-1/2 lg:w-48 text-black rounded-lg border border-black"/>
                     
             <input required style={{ display: "none" }} type="file" id={id+'image'} value={image} onChange={(e)=>changeImage(e.target.value)} placeholder="Enter Animal's Image" />
             <label htmlFor={id+'image'} className='flex gap-3 items-center '>
-              <i class="fa-solid fa-images text-3xl"></i>
+              <i className="fa-solid fa-images text-3xl"></i>
               <span className='font-semibold'>Add a Photo</span>
             </label>
 
@@ -375,11 +389,20 @@ const AdminPanel = () => {
 
       <div className='w-1/2 pl-5'>
 
-        <div className='flex justify-center gap-5 pb-8'>
+        <div className='flex flex-col items-end'>
 
-          <h5 className={`text-lg ${selectedTab=="animal" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>setSelectedTab("animal")}>Animals</h5>
-          <h5 className={`text-lg ${selectedTab=="user" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>setSelectedTab("user")}>Users</h5>
-          <h5 className={`text-lg ${selectedTab=="admin" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>setSelectedTab("admin")}>Admins</h5>
+          <div className='w-full flex justify-center gap-5 pb-5'>
+            <h5 className={`text-lg ${selectedTab=="animal" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>setSelectedTab("animal")}>Animals</h5>
+            <h5 className={`text-lg ${selectedTab=="user" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>setSelectedTab("user")}>Users</h5>
+            <h5 className={`text-lg ${selectedTab=="admin" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>setSelectedTab("admin")}>Admins</h5>
+          </div>
+          {selectedTab=="animal" && (
+
+          <Select name="adoptfilter" value={adoptFilter} options={adoptStates} getOptionLabel={(option) => option.label} 
+                  getOptionValue={(option) => option.value}  onChange={onChangeFilter} placeholder={adoptFilter || "Select Filter"} 
+                  className="xs:w-1/2 lg:w-36 text-sm mb-3 text-black rounded-lg border border-black"/>
+          
+          )}
 
         </div>
 

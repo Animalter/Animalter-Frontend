@@ -5,6 +5,7 @@ import AnimalCard from '../components/AnimalCard';
 const ExplorerPage = () => {
 
   const explorerAnimals=[];
+  //infinite scroll kullanılabilir
 
   return (
     <div className='my-8 px-8'>

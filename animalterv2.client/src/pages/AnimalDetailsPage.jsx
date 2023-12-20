@@ -2,8 +2,22 @@ import React from 'react'
 import Image from '../components/Image'
 import Example from '../assets/animalter-example-img.jpg'
 import AnimalCard from '../components/AnimalCard'
+import axios from 'axios'
+import { useCookies } from 'react-cookie'
 
 const AnimalDetailsPage = () => {
+
+  const [cookie,setCookie]=useCookies(['name']);
+
+  const adoptAnimal=(animalid,userid)=>{
+    axios.post(`url/${animalid}/${userid}`).then((res)=>{
+      //success message
+
+    }).catch((err)=>{
+      console.log(err);
+    })
+  }
+
   return (
     <div className='my-10'>
 
@@ -30,7 +44,7 @@ const AnimalDetailsPage = () => {
             Beatae molestiae labore perferendis maiores sint impedit delectus aut sit pariatur eveniet harum numquam laboriosam veritatis eligendi esse neque laborum quasi, sed aliquam dolorum. Veritatis ea est qui eius quam..</p>
           </div>
 
-          <button className='w-full text-white p-2 border border-white bg-[#009D69] rounded-full hover:border-[#009D69]'>Adopt</button>
+          <button disabled={"animal.adopt=='adopted' || !cookie.name"} onClick={()=>adoptAnimal("animal.id","user.id")} className='w-full text-white p-2 border border-white bg-[#009D69] rounded-full hover:border-[#009D69]'>Adopt</button>
           
         </div>
 

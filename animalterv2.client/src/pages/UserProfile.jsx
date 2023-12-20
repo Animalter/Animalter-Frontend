@@ -1,11 +1,10 @@
-import React, { useId, useState } from 'react'
+import React, { useEffect, useId, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 const UserProfile = () => {
 
-  //logout function
-  //state'de prev kullanımı
   //use toast for update notification
   
   const [showForm,setShowForm]=useState(false);
@@ -14,6 +13,7 @@ const UserProfile = () => {
 
   const id=useId();
   const navigate=useNavigate();
+  const [cookie,setCookie]=useCookies(['name']);
   
   const [name,setName]=useState("");
   const [password,setPassword]=useState("");
@@ -61,8 +61,17 @@ const UserProfile = () => {
   }
 
   const logout=()=>{
+
+    setCookie('name',"");
+    navigate("/");
     
   }
+
+  useEffect(()=>{
+
+    if(!cookie.name) navigate('/login');
+
+  },[])
 
   const adoptedAnimals=[];
 
@@ -76,9 +85,9 @@ const UserProfile = () => {
           <h1 className='font-bold text-3xl '>Profile Info</h1>
 
           <div className='flex gap-3 items-center'>
-            <i className={`fa-solid ${showForm ? 'fa-x':'fa-pen'}`} onClick={()=>{setShowForm(!showForm); setDeleteSection(false);}}></i>
-            <i className={`fa-solid ${deleteSection ? 'fa-x':'fa-trash'}`} onClick={()=>{setDeleteSection(!deleteSection); setShowForm(false);}}></i>
-            <i class="fa-solid fa-right-from-bracket text-white p-1 rounded-lg bg-red-500" onClick={logout}></i>
+            <i className={`fa-solid ${showForm ? 'fa-x':'fa-pen'}`} onClick={()=>{setShowForm((prev)=>!prev); setDeleteSection(false);}}></i>
+            <i className={`fa-solid ${deleteSection ? 'fa-x':'fa-trash'}`} onClick={()=>{setDeleteSection((prev)=>!prev); setShowForm(false);}}></i>
+            <i class="fa-solid fa-right-from-bracket text-white p-1 rounded-lg bg-red-500" onClick={()=>logout()}></i>
           </div>
           
           

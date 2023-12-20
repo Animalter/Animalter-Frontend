@@ -3,26 +3,34 @@ import { useNavigate } from 'react-router-dom';
 
 const FilterAnimal = () => {
 
+  //hangi url ile gönderilecek
+  //gelen veri diğer sayfaya nasıl gidecek
+
   const id=useId();
   const navigate=useNavigate();
 
-  const filters=[];
+  const [name,setName]=useState("");
+  const [type,setType]=useState("");
+  const [genus,setGenus]=useState("");
+  const [age,setAge]=useState();
 
-  const handleSubmit=async(e)=>{
 
-    e.preventDefault();
+  const handleSubmit=()=>{
 
-    const name=e.target[0].value;
-    filters.push(name);
-    const type=e.target[1].value;
-    filters.push(type);
-    const genus=e.target[2].value;
-    filters.push(genus);
-    const age=await e.target[3].value;
-    filters.push(age);
+    const data={
+      Name:name,
+      Type:type,
+      Genus:genus,
+      Age:age,
+    }
+    const url="/";
+    axios.post(url,data).then(()=>{
+      navigate("/search/result")
+    }).catch((err)=>{
+      console.log(err);
+    });
 
-    navigate("/search/result") 
-
+     
   }
 
   return (
@@ -30,33 +38,29 @@ const FilterAnimal = () => {
       
      <h2 className='text-xl text-white underline underline-offset-8 font-semibold '>Detailed Search</h2>
 
-     <form action="" onSubmit={(e)=>handleSubmit(e)} className='flex flex-col items-end w-1/3 mt-20'>
+     <form action="" className='flex flex-col items-end w-1/3 mt-20'>
 
       <div className='mb-6 flex gap-5'>
         <label htmlFor={id+'name'} className='font-bold text-white '>Name</label>
-        <input type="text" id={id+'name'} className='rounded-lg outline-none px-1 py-0.5'/>
+        <input type="text" id={id+'name'} value={name} onChange={(e)=>setName(e.target.value)} className='rounded-lg outline-none px-1 py-0.5'/>
       </div>
 
       <div className='mb-6 flex gap-7'>
         <label htmlFor={id+'type'} className='font-bold text-white '>Type</label>
-        <input type="text" id={id+'type'} className='rounded-lg outline-none px-1 py-0.5'/>
+        <input type="text" id={id+'type'} value={type} onChange={(e)=>setType(e.target.value)} className='rounded-lg outline-none px-1 py-0.5'/>
       </div>
 
       <div className='mb-6 flex gap-4'>
         <label htmlFor={id+'genus'} className='font-bold text-white '>Genus</label>
-        <input type="text" id={id+'genus'} className='rounded-lg outline-none px-1 py-0.5'/>
+        <input type="text" id={id+'genus'} value={genus} onChange={(e)=>setGenus(e.target.value)} className='rounded-lg outline-none px-1 py-0.5'/>
       </div>
 
       <div className='mb-6 flex gap-8'>
         <label htmlFor={id+'age'} className='font-bold text-white'>Age</label>
-        <input type="text" id={id+'age'} className='rounded-lg outline-none px-1 py-0.5'/>
+        <input type="text" id={id+'age'} value={age} onChange={(e)=>setAge(e.target.value)} className='rounded-lg outline-none px-1 py-0.5'/>
       </div>
 
-      <button type='submit' className='w-3/4 px-2 py-1 bg-[#009D69] rounded-full text-white border border-white hover:border-[#009D69]'>Search</button>
-
-
-
-
+      <button onClick={handleSubmit} className='w-3/4 px-2 py-1 bg-[#009D69] rounded-full text-white border border-white hover:border-[#009D69]'>Search</button>
 
      </form>
 

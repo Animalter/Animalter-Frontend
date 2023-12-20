@@ -23,7 +23,7 @@ const RegisterPage = () => {
 
   const changePhone=(value)=>{  setPhone(value);  }
 
-  const register=(e)=>{
+  const register=()=>{
 
     const data={
       Name:name,
@@ -33,7 +33,7 @@ const RegisterPage = () => {
     }
     const url="/";
     axios.post(url,data).then(()=>{
-      navigate("/");
+      navigate("/login");
     }).catch((err)=>{
       console.log(err);
     });
@@ -58,7 +58,7 @@ const RegisterPage = () => {
 
         <input type="tel" id={id+'phone'} value={phone} onChange={(e)=>changePhone(e.target.value)} pattern='[0]{1}[5]{1}[0-9]{9}' placeholder='Enter Your Phone Number' className='px-3 py-1 rounded-full border border-black outline-none'/>
 
-        <button className='w-full p-2 rounded-full text-white bg-[#009D69] border border-white hover:border-[#009D69]'>Register</button>
+        <button onClick={register} className='w-full p-2 rounded-full text-white bg-[#009D69] border border-white hover:border-[#009D69]'>Register</button>
 
         <p className='text-white'>Do You Have Account ? <Link to="/login" className='font-bold' >Login</Link></p>
 
