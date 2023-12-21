@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import AnimalCard from '../components/AnimalCard';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import Loading from '../components/Loading';
 
 const SearchResult = () => {
 
@@ -36,6 +37,7 @@ const SearchResult = () => {
 
   return (
     <div>
+      
       {
         //results.map((animal)=>(
           

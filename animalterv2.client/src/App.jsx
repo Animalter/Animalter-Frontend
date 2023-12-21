@@ -21,6 +21,8 @@ function App() {
     //responsive design
     //infinite scroll
     //carousel structure with swiger
+    //loading component 
+    //update route structure by cookie
 
     return (
         <div>
