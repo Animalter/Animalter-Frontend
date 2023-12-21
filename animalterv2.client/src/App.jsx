@@ -19,8 +19,8 @@ import FAQPage from './pages/FAQPage';
 function App() {
 
     //responsive design
-    //işlemlerden sonra popup ile bilgi verilmesi (toastify kullanılabilir)
-    //middleware için ne yapılmalı
+    //infinite scroll
+    //carousel structure with swiger
 
     return (
         <div>

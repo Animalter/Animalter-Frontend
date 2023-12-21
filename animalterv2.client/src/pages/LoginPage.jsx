@@ -5,8 +5,6 @@ import { useCookies } from 'react-cookie';
 
 const LoginPage = () => {
 
-  //kullanıcı bağlandığında cookie'ye id, role ve name bilgilerini kaydet
-
   const id=useId();
   const navigate=useNavigate();
   const [cookie,setCookie]=useCookies(["name"]);
@@ -26,10 +24,10 @@ const LoginPage = () => {
       Password:password,
     }
     const url="/";
-    axios.post(url,data).then(()=>{
+    axios.post(url,data).then((res)=>{
       setCookie('name',name);
-      //setCookie('id',id);
-      //setCookie('role',role);
+      //setCookie('id',res.id);
+      //setCookie('role',res.role);
       //token ?  id ve role değerinin get ile alınması (res ile döndürülebilir mi)
       navigate("/");
     }).catch((err)=>{

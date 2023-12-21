@@ -1,25 +1,42 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Image from '../components/Image'
 import Example from '../assets/animalter-example-img.jpg'
 import AnimalCard from '../components/AnimalCard'
 import axios from 'axios'
 import { useCookies } from 'react-cookie'
+import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AnimalDetailsPage = () => {
 
   const [cookie,setCookie]=useCookies(['name']);
+  const navigate=useNavigate();
+
+  const notifyAdopt = () => toast.success("We received your adopt request. We contact you as soon as possible");
+  const notifyError = () => toast.success("Operation failed. Try again");
 
   const adoptAnimal=(animalid,userid)=>{
+    if(!cookie.name){ 
+      navigate("/login")
+    }
+    else{  
     axios.post(`url/${animalid}/${userid}`).then((res)=>{
-      //success message
+      
+      notifyAdopt();
 
     }).catch((err)=>{
       console.log(err);
+      notifyError();
     })
+    }
   }
+
 
   return (
     <div className='my-10'>
+
+    <ToastContainer position="top-right" autoClose={false} />
 
       <div className='w-3/4 mx-auto flex gap-20 mb-20'>
 
@@ -44,7 +61,7 @@ const AnimalDetailsPage = () => {
             Beatae molestiae labore perferendis maiores sint impedit delectus aut sit pariatur eveniet harum numquam laboriosam veritatis eligendi esse neque laborum quasi, sed aliquam dolorum. Veritatis ea est qui eius quam..</p>
           </div>
 
-          <button disabled={"animal.adopt=='adopted' || !cookie.name"} onClick={()=>adoptAnimal("animal.id","user.id")} className='w-full text-white p-2 border border-white bg-[#009D69] rounded-full hover:border-[#009D69]'>Adopt</button>
+          <button disabled={"animal.adopt=='adopted' "} onClick={()=>adoptAnimal("animal.id","user.id")} className='w-full text-white p-2 border border-white bg-[#009D69] rounded-full hover:border-[#009D69]'>Adopt</button>
           
         </div>
 

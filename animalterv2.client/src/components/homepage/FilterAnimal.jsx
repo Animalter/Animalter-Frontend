@@ -9,26 +9,27 @@ const FilterAnimal = () => {
   const id=useId();
   const navigate=useNavigate();
 
-  const [name,setName]=useState("");
-  const [type,setType]=useState("");
-  const [genus,setGenus]=useState("");
+  const [name,setName]=useState();
+  const [type,setType]=useState();
+  const [genus,setGenus]=useState();
   const [age,setAge]=useState();
 
 
   const handleSubmit=()=>{
 
-    const data={
-      Name:name,
-      Type:type,
-      Genus:genus,
-      Age:age,
-    }
-    const url="/";
-    axios.post(url,data).then(()=>{
-      navigate("/search/result")
-    }).catch((err)=>{
-      console.log(err);
-    });
+    //const data={
+    //  Name:name,
+    //  Type:type,
+    //  Genus:genus,
+    //  Age:age,
+    //}
+    //const url="/";
+    //axios.post(url,data).then(()=>{
+
+      navigate(`/search/${name}-${type}-${genus}-${age}`)
+    //}).catch((err)=>{
+    //  console.log(err);
+    //});
 
      
   }

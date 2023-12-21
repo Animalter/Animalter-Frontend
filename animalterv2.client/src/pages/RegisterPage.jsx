@@ -3,12 +3,15 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RegisterPage = () => {
 
   const id=useId();
-
   const navigate=useNavigate();
+
+  const notifyError = () => toast.success("Operation Failed Try Again");
 
   const [name,setName]=useState("");
   const [password,setPassword]=useState("");
@@ -36,6 +39,7 @@ const RegisterPage = () => {
       navigate("/login");
     }).catch((err)=>{
       console.log(err);
+      notifyError();
     });
   
 
@@ -43,6 +47,8 @@ const RegisterPage = () => {
 
   return (
     <div className='flex flex-col gap-8 justify-center items-center h-156 w-full bg-login-register-bg bg-cover'>
+
+    <ToastContainer position="top-right" autoClose={5000} />
 
     <h3 className='text-white font-bold text-3xl underline-offset-4 underline decoration-4'>REGISTER</h3>
 

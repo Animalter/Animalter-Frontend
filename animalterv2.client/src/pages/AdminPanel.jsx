@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import Select from "react-select"
 import { useCookies } from 'react-cookie';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AdminPanel = () => {
-  
 
   const id=useId();
   const navigate=useNavigate();
@@ -17,6 +18,11 @@ const AdminPanel = () => {
   const [selectedId,setSelectedId]=useState("");
   const [adoptFilter,setAdoptFilter]=useState("");
   const [data,setData]=useState();
+
+  const notifyAdd = () => toast.success("Registry Added");
+  const notifyUpdate = () => toast.success("Registry Updated");
+  const notifyDelete = () => toast.success("Registry Deleted");
+  const notifyError = () => toast.success("Operation Failed Try Again");
 
   const [name,setName]=useState("");
   const [password,setPassword]=useState("");
@@ -114,13 +120,14 @@ const AdminPanel = () => {
 
     axios.post(url,data).then(()=>{
 
-      //success message
+      notifyAdd();
       showData();
       resetStates();
 
     }).catch((err)=>{
 
       console.log(err);
+      notifyError();
     })
 
   }
@@ -176,7 +183,7 @@ const AdminPanel = () => {
 
     axios.put(url,data).then(()=>{
 
-      //success message
+      notifyUpdate();
       showData();
       resetStates();
       setShowPopup(false);
@@ -184,6 +191,7 @@ const AdminPanel = () => {
     }).catch((err)=>{
 
       console.log(err);
+      notifyError();
     })
 
   }
@@ -193,7 +201,8 @@ const AdminPanel = () => {
     axios.delete(`url/${id}`).then((res)=>{
 
       if(res.status===200){
-        //success message
+        
+        notifyDelete();
         showData();
         resetStates();
         setShowPopup(false);
@@ -201,7 +210,7 @@ const AdminPanel = () => {
     }).catch((err)=>{
 
       console.log(err);
-      //toast ile kullanıcıya da gösterilebilir
+      notifyError();
     })
 
   }
@@ -229,6 +238,7 @@ const AdminPanel = () => {
 
     if(cookie.role && cookie.role=="admin") showData();
     else navigate("/login");
+    
   },[])
 
   useEffect(()=>{
@@ -249,6 +259,8 @@ const AdminPanel = () => {
 
   return (
     <div className='relative h-screen my-6'>
+
+      <ToastContainer position="top-right" autoClose={5000} />
 
       <h1 className='font-bold text-3xl text-center'>Admin Panel</h1>
 

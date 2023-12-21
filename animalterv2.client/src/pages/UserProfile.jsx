@@ -2,18 +2,19 @@ import React, { useEffect, useId, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const UserProfile = () => {
-
-  //use toast for update notification
   
   const [showForm,setShowForm]=useState(false);
   const [deleteSection,setDeleteSection]=useState(false);
-  console.log(deleteSection);
 
   const id=useId();
   const navigate=useNavigate();
   const [cookie,setCookie]=useCookies(['name']);
+
+  const notifyUpdate = () => toast.success("Profile Info Updated");
   
   const [name,setName]=useState("");
   const [password,setPassword]=useState("");
@@ -40,7 +41,7 @@ const UserProfile = () => {
     const url=`/url/${id}`;
     axios.put(url,data).then(()=>{
       
-      //success message     
+      notifyUpdate();     
 
     }).catch((err)=>{
       console.log(err);
@@ -77,6 +78,8 @@ const UserProfile = () => {
 
   return (
     <div className='flex w-3/4 mx-auto my-10 '>
+
+      <ToastContainer position="top-right" autoClose={5000} />
 
       <div className='w-1/2 pr-3 border-r-2 border-black h-screen'>
 
