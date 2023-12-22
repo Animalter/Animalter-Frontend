@@ -6,6 +6,7 @@ import Example from '../assets/animalter-example-img.jpg'
 const AnimalType = () => {
 
   const params =useParams();
+  const parameteres=params.animaltype.split("-");
   const animalsbygenus=[];
 
   //carousel
@@ -13,7 +14,7 @@ const AnimalType = () => {
 
   return (
     <div className='p-8 '>
-      <h1 className='capitalize text-2xl font-bold mb-8'>{params.animaltype}</h1>
+      <h1 className='capitalize text-2xl font-bold mb-8'>{parameteres[0]}</h1>
 
       <div>
         <h3 className='font-semibold text-lg capitalize'>Genus 1</h3>

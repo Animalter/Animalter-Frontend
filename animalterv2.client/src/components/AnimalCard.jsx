@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const AnimalCard = ({name,type,genus,age,image}) => {
   return (
     <Link to={`/animal/${type}/id`}>
-    <div className='relative h-60 w-36 '>
+    <div className='relative  h-60 w-36'>
 
         <div className='absolute top-0 left-0 '>
           <Image src={image} className={"h-60"}/>

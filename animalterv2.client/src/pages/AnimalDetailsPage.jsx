@@ -7,6 +7,9 @@ import { useCookies } from 'react-cookie'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+
 
 const AnimalDetailsPage = () => {
 
@@ -70,14 +73,32 @@ const AnimalDetailsPage = () => {
       <div className='w-3/4 mx-auto'>
         <h3 className='font-semibold text-lg my-5'>Similar</h3>
 
-        <AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/>
+        <Swiper slidesPerView={5} >
+          <SwiperSlide><AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/></SwiperSlide>
+          <SwiperSlide><AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/></SwiperSlide>
+          <SwiperSlide><AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/></SwiperSlide>
+          <SwiperSlide><AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/></SwiperSlide>
+          <SwiperSlide><AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/></SwiperSlide>
+          <SwiperSlide><AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/></SwiperSlide>
+        </Swiper>
+
+        
 
       </div>
 
       <div className='w-3/4 mx-auto'>
         <h3 className='font-semibold text-lg mb-5 mt-10'>Recommedations</h3>
 
-        <AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/>
+        <Swiper slidesPerView={5} >
+
+          { //recommended.map((animal)=>{
+
+          <SwiperSlide><AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/></SwiperSlide>
+
+          //}) 
+          }
+          
+        </Swiper>
 
       </div>
       

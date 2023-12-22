@@ -20,9 +20,10 @@ function App() {
 
     //responsive design
     //infinite scroll
-    //carousel structure with swiger
-    //loading component 
     //update route structure by cookie
+    //update redux
+    //GPT Lines
+    //fake data 
 
     return (
         <div>

@@ -79,7 +79,7 @@ const AdminPanel = () => {
 
   const showData=()=>{
 
-    axios.get("url").then((res)=>{
+    axios.get("http://localhost:8641/Customer").then((res)=>{
 
       setData(res.data);
 
