@@ -4,6 +4,7 @@ import Logo from '../assets/animalter-logo.svg'
 import { Link, NavLink } from 'react-router-dom'
 import axios from 'axios'
 import { useCookies } from 'react-cookie'
+import { useGetTypesQuery } from '../store/slices/apiSlice'
 
 const Header = () => {
 
@@ -11,22 +12,8 @@ const Header = () => {
 
   const [data,setData]=useState([]);
 
-  const getTypes=()=>{
-    axios.get("http://localhost:8641/Typee").then((res)=>{
-
-    setData(res.data);
-    
-  }).catch((err)=>{
-
-    console.log(err);
-
-  })
-  }
-
-  useEffect(()=>{
-
-    getTypes();
-  },[])
+  const types=useGetTypesQuery();
+  
 
   return (
     <header className='bg-[#0093E9] text-white w-full h-16 flex items-center justify-between px-8'>
@@ -42,7 +29,7 @@ const Header = () => {
 
       <nav className='flex gap-5'>
 
-        {data.map((e,i)=>(
+        {types?.data?.map((e,i)=>(
           <NavLink key={i} to={`animal/${e.typeee}-${e.typeId}` }className={({ isActive }) => isActive ? 'text-black ' : 'hover:underline underline-offset-4'}>{e.typeee}</NavLink>
         ))}
 

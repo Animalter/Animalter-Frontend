@@ -3,15 +3,11 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const animalApi = createApi({
   reducerPath: 'animalApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: '',
-    prepareHeaders: (headers) => {
-      //headers.set('X-RapidAPI-Key', import.meta.env.VITE_SHAZAM_CORE_RAPID_API_KEY);
-
-      //return headers;
-    },
+    baseUrl: 'http://localhost:8641/',
+    
   }),
   endpoints: (builder) => ({
-    getTopCharts: builder.query({ query: () => 'v1/charts/world' }),
+    getTypes: builder.query({ query: () => 'Typee' }),
     getSongsByGenre: builder.query({ query: (genre) => `v1/charts/genre-world?genre_code=${genre}` }),
     getSongsByCountry: builder.query({ query: (countryCode) => `v1/charts/country?country_code=${countryCode}` }),
     getSongsBySearch: builder.query({ query: (searchTerm) => `v1/search/multi?search_type=SONGS_ARTISTS&query=${searchTerm}` }),
@@ -22,7 +18,7 @@ export const animalApi = createApi({
 });
 
 export const {
-  useGetTopChartsQuery,
+  useGetTypesQuery,
   useGetSongsByGenreQuery,
   useGetSongsByCountryQuery,
   useGetSongsBySearchQuery,

@@ -48,12 +48,12 @@ const FilterAnimal = () => {
 
       <div className='mb-6 flex gap-7'>
         <label htmlFor={id+'type'} className='font-bold text-white '>Type</label>
-        <input type="text" id={id+'type'} value={type} onChange={(e)=>setType(e.target.value)} className='rounded-lg outline-none px-1 py-0.5'/>
+        <input type="text" id={id+'type'} value={type} onChange={(e)=>setType(e.target.value)} placeholder='Dog, Cat, Bird, Fish' className='rounded-lg outline-none px-1 py-0.5'/>
       </div>
 
       <div className='mb-6 flex gap-4'>
         <label htmlFor={id+'genus'} className='font-bold text-white '>Genus</label>
-        <input type="text" id={id+'genus'} value={genus} onChange={(e)=>setGenus(e.target.value)} className='rounded-lg outline-none px-1 py-0.5'/>
+        <input type="text" id={id+'genus'} value={genus} onChange={(e)=>setGenus(e.target.value)} placeholder='British, Golden etc.' className='rounded-lg outline-none px-1 py-0.5'/>
       </div>
 
       <div className='mb-6 flex gap-8'>

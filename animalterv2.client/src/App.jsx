@@ -18,9 +18,8 @@ import FAQPage from './pages/FAQPage';
 
 function App() {
 
-    //responsive design
-    //infinite scroll
-    //update route structure by cookie
+    //responsive design ?
+    //infinite scroll ?
     //update redux
     //GPT Lines
     //fake data 
