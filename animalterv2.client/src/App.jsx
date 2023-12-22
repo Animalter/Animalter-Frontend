@@ -15,14 +15,17 @@ import UserProfile from './pages/UserProfile';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import FAQPage from './pages/FAQPage';
+import ChatGPT from './pages/ChatGPT'
 
 function App() {
 
     //responsive design ?
     //infinite scroll ?
     //update redux
-    //GPT Lines
     //fake data 
+    //gpt api .env file
+    //person types for gpt
+    //navigate to gpt from homepage
 
     return (
         <div>
@@ -42,6 +45,7 @@ function App() {
                 <Route path="/login" element={<LoginPage/>} />
                 <Route path="/register" element={<RegisterPage/>} />   
                 <Route path="/faq" element={<FAQPage/>} />
+                <Route path="/chatwithgpt" element={<ChatGPT/>} />
 
             </Routes>
 
