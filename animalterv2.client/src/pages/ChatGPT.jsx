@@ -86,10 +86,10 @@ function App() {
 
   return (
     <div className="App flex justify-center ">
-      <div className='mb-5' style={{ position:"relative", height: "800px", width: "1400px" }}>
+      <div style={{ position:"relative", height: "800px", width: "1400px" }}>
         <MainContainer>
           <ChatContainer >       
-            <MessageList className='pt-8'
+            <MessageList className='py-5'
               scrollBehavior="smooth" 
               typingIndicator={isTyping ? <TypingIndicator content="ChatGPT is typing" /> : null}
             >
@@ -99,7 +99,8 @@ function App() {
               })}
             </MessageList>       
           </ChatContainer>
-          <div className='mt-8 px-4 w-1/4 flex flex-col justify-start items-center gap-5 border-r-2 border-black '>
+          <div className='my-5 xs:px-1 lg:px-4 xs:w-1/2 lg:w-1/4 flex flex-col justify-start items-center gap-5 border-r-2 border-black '>
+
             <button onClick={()=>handleSend("Sosyal ve Dost Canlısı biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Sosyal ve Dost Canlısı</button>
             <button onClick={()=>handleSend("Enerjik ve Maceraperest biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Enerjik ve Maceraperest</button>
             <button onClick={()=>handleSend("Düzenli ve Sorumluluk Sahibi biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Düzenli ve Sorumluluk Sahibi</button>          
