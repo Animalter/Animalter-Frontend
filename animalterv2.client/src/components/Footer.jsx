@@ -2,9 +2,9 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className='bg-[#817FA2] text-white flex xs:flex-col lg:flex-row xs:gap-8 lg:gap-0 lg:justify-around py-3'>
+    <div className='bg-[#817FA2] text-white flex xs:flex-col lg:flex-row xs:gap-8 lg:gap-0 lg:justify-center  py-3'>
 
-      <div className='flex justify-around lg:w-1/2'>
+      <div className='flex justify-around lg:w-2/5'>
 
         <div className='flex flex-col items-center'>
           <h3 className='font-bold text-lg mb-3'>Animalter</h3>
@@ -31,7 +31,7 @@ const Footer = () => {
 
       </div>
 
-      <div className='flex justify-around lg:w-1/2'>
+      <div className='flex justify-around lg:w-2/5'>
 
         <div>
           <h3 className='font-bold text-lg mb-3'>Contact</h3>
