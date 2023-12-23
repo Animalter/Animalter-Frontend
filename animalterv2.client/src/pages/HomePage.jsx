@@ -13,7 +13,7 @@ const HomePage = () => {
 
       <div className='bg-gpt-bg h-96 xs:w-9/10 lg:w-4/5 mx-auto bg-cover text-white p-8 flex flex-col justify-between rounded-md'>
 
-        <p className='text-md'>chatGPT 3.5</p>
+        <p className='text-md'>ChatGPT 3.5</p>
 
         <div className='flex flex-col gap-5'>
           <h3 className='xs:text-3xl lg:text-4xl'>Get Advice From ChatGPT</h3>

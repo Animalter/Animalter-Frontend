@@ -41,13 +41,13 @@ const AnimalDetailsPage = () => {
 
     <ToastContainer position="top-right" autoClose={false} />
 
-      <div className='w-3/4 mx-auto flex gap-20 mb-20'>
+      <div className='xs:w-9/10 lg:w-3/4 mx-auto flex xs:flex-col lg:flex-row xs:gap-8 lg:gap-20 xs:mb-10 lg:mb-20'>
 
-        <div className='w-1/2 '>
+        <div className='xs:w-full lg:w-1/2 '>
           <Image src={Example} className={"h-156"}/>
         </div>
 
-        <div className='flex flex-col justify-between max-w-md'>
+        <div className='flex flex-col xs:gap-6 lg:gap-0 justify-between max-w-md'>
 
           <div>      
             <h3 className='text-lg font-semibold capitalize'>name</h3>
@@ -70,10 +70,11 @@ const AnimalDetailsPage = () => {
 
       </div>
 
-      <div className='w-3/4 mx-auto'>
+      <div className='xs:w-9/10 lg:w-3/4 mx-auto'>
         <h3 className='font-semibold text-lg my-5'>Similar</h3>
 
-        <Swiper slidesPerView={5} >
+        <Swiper  breakpoints={{320: {slidesPerView: 3,},720: {slidesPerView: 4,},1040: { slidesPerView: 5,},}}>
+
           <SwiperSlide><AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/></SwiperSlide>
           <SwiperSlide><AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/></SwiperSlide>
           <SwiperSlide><AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/></SwiperSlide>
@@ -86,7 +87,7 @@ const AnimalDetailsPage = () => {
 
       </div>
 
-      <div className='w-3/4 mx-auto'>
+      <div className='xs:w-9/10 lg:w-3/4 mx-auto'>
         <h3 className='font-semibold text-lg mb-5 mt-10'>Recommedations</h3>
 
         <Swiper slidesPerView={5} >
