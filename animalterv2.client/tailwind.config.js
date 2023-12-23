@@ -11,7 +11,9 @@ export default {
     },
     backgroundImage: {
       'hero-section': "url('./src/assets/herobanner-bg.jpg')",
+      'hero-section-responsive':"url('./src/assets/herobanner-bg-responsive.jpg')",
       'filter-field': "url('./src/assets/filterfield-bg.jpg')",
+      'filter-field-responsive':"url('./src/assets/filterfield-bg-responsive.jpg')",
       'login-register-bg':"url('./src/assets/login-register-bg.jpeg')",
       'gpt-bg':"url('./src/assets/gpt-bg.jpg')"
     },
@@ -21,7 +23,7 @@ export default {
       '156':'39rem',
     },
     width:{
-      '7/20':'35%',//remove 
+      '9/10':'90%',//remove 
     } 
     },
     screens: {

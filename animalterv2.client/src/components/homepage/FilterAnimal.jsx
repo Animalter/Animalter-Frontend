@@ -35,11 +35,11 @@ const FilterAnimal = () => {
   }
 
   return (
-    <div className='flex flex-col h-128 bg-filter-field bg-cover w-4/5 m-auto my-6 py-5 px-10 rounded-md'>
+    <div className='flex flex-col xs:items-center lg:items-start xs:h-96 lg:h-128 xs:bg-filter-field-responsive lg:bg-filter-field bg-cover xs:w-9/10 lg:w-4/5 m-auto my-6 py-5 px-10 rounded-md'>
       
      <h2 className='text-xl text-white underline underline-offset-8 font-semibold '>Detailed Search</h2>
 
-     <form action="" className='flex flex-col items-end w-1/3 mt-20'>
+     <form action="" className='flex flex-col items-end lg:w-1/3 xs:mt-10 lg:mt-20 '>
 
       <div className='mb-6 flex gap-5'>
         <label htmlFor={id+'name'} className='font-bold text-white '>Name</label>
@@ -61,7 +61,7 @@ const FilterAnimal = () => {
         <input type="text" id={id+'age'} value={age} onChange={(e)=>setAge(e.target.value)} className='rounded-lg outline-none px-1 py-0.5'/>
       </div>
 
-      <button onClick={handleSubmit} className='w-3/4 px-2 py-1 bg-[#009D69] rounded-full text-white border border-white hover:border-[#009D69]'>Search</button>
+      <button onClick={handleSubmit} className='xs:w-full lg:w-3/4 px-2 py-1 bg-[#009D69] rounded-full text-white border border-white hover:border-[#009D69]'>Search</button>
 
      </form>
 
