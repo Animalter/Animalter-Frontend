@@ -35,7 +35,7 @@ const FilterAnimal = () => {
   }
 
   return (
-    <div className='flex flex-col h-128 bg-filter-field bg-cover w-4/5 m-auto my-6 py-5 px-10'>
+    <div className='flex flex-col h-128 bg-filter-field bg-cover w-4/5 m-auto my-6 py-5 px-10 rounded-md'>
       
      <h2 className='text-xl text-white underline underline-offset-8 font-semibold '>Detailed Search</h2>
 
@@ -48,7 +48,7 @@ const FilterAnimal = () => {
 
       <div className='mb-6 flex gap-7'>
         <label htmlFor={id+'type'} className='font-bold text-white '>Type</label>
-        <input type="text" id={id+'type'} value={type} onChange={(e)=>setType(e.target.value)} placeholder='Dog, Cat, Bird, Fish' className='rounded-lg outline-none px-1 py-0.5'/>
+        <input type="text" id={id+'type'} value={type} onChange={(e)=>setType(e.target.value)} placeholder='Dog, Cat, Bird, Fish etc.' className='rounded-lg outline-none px-1 py-0.5'/>
       </div>
 
       <div className='mb-6 flex gap-4'>

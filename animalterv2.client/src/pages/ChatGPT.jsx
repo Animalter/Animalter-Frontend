@@ -2,7 +2,9 @@ import { useState } from 'react'
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react';
 
+
 const API_KEY = "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";
+
 // "Explain things like you would to a 10 year old learning how to code."
 const systemMessage = { //  Explain things like you're talking to a software professional with 5 years of experience.
   "role": "system", "content": "Explain things like you're talking to a software professional with 2 years of experience."
@@ -98,8 +100,17 @@ function App() {
             </MessageList>       
           </ChatContainer>
           <div className='mt-8 px-4 w-1/4 flex flex-col justify-start items-center gap-5 border-r-2 border-black '>
-            <button onClick={()=>handleSend("Evcil Hayvan Nedir")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Soru 1</button>
-            <button onClick={()=>handleSend("Evcil Kuşlara Örnek Ver")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Soru 2</button>
+            <button onClick={()=>handleSend("Sosyal ve Dost Canlısı biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Sosyal ve Dost Canlısı</button>
+            <button onClick={()=>handleSend("Enerjik ve Maceraperest biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Enerjik ve Maceraperest</button>
+            <button onClick={()=>handleSend("Düzenli ve Sorumluluk Sahibi biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Düzenli ve Sorumluluk Sahibi</button>          
+            <button onClick={()=>handleSend("Enerjik ve Coşkulu biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Enerjik ve Coşkulu</button>
+            <button onClick={()=>handleSend("Sakin ve Meditatif biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Sakin ve Meditatif</button>
+            <button onClick={()=>handleSend("Mücadeleci ve Cesur biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Mücadeleci ve Cesur</button>
+            <button onClick={()=>handleSend("Arkadaş Canlısı ve Toplumcu biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Arkadaş Canlısı ve Toplumcu</button>
+            <button onClick={()=>handleSend("Yaratıcı ve Farklılık Arayan biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Yaratıcı ve Farklılık Arayan</button>
+            <button onClick={()=>handleSend("Duygusal ve Hassas biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Duygusal ve Hassas</button>
+            <button onClick={()=>handleSend("Aktif ve Sporcu biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Aktif ve Sporcu</button>
+            
           </div>
           
         </MainContainer>

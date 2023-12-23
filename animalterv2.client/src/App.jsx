@@ -23,9 +23,6 @@ function App() {
     //infinite scroll ?
     //update redux
     //fake data 
-    //gpt api .env file
-    //person types for gpt
-    //navigate to gpt from homepage
 
     return (
         <div>

@@ -6,7 +6,7 @@ const HeroBanner = () => {
   const navigate=useNavigate();
 
   return (
-    <div className=' flex justify-end h-112 bg-hero-section bg-cover w-4/5 m-auto my-6'>
+    <div className=' flex justify-end h-112 bg-hero-section bg-cover w-4/5 m-auto my-6 rounded-md'>
       
       <div className='h-full flex flex-col justify-around items-center pr-16'>
 
