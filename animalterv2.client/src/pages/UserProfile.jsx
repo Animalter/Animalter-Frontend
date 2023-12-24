@@ -39,9 +39,10 @@ const UserProfile = () => {
       Phone:phone,
     }
     const url=`/url/${id}`;
-    axios.put(url,data).then(()=>{
+    axios.put(url,data).then((res)=>{
       
-      notifyUpdate();     
+      notifyUpdate();    
+      setCookie('name',res.data.name)
 
     }).catch((err)=>{
       console.log(err);
@@ -70,22 +71,22 @@ const UserProfile = () => {
 
   useEffect(()=>{
 
-    if(!cookie.name) navigate('/login');
+    if(!cookie.role) navigate('/login');
 
   },[])
 
   const adoptedAnimals=[];
 
   return (
-    <div className='flex w-3/4 mx-auto my-10 '>
+    <div className='flex xs:flex-col-reverse lg:flex-row xs:w-9/10 md:w-4/5 lg:w-3/4  mx-auto my-10 '>
 
       <ToastContainer position="top-right" autoClose={5000} />
 
-      <div className='w-1/2 pr-3 border-r-2 border-black h-screen'>
+      <div className='xs:w-full xs:h-128 lg:h-screen lg:w-1/2 pr-3 lg:border-r-2 border-black h-screen'>
 
         <div className='flex justify-between items-center mb-12'>
                     
-          <h1 className='font-bold text-3xl '>Profile Info</h1>
+          <h1 className='font-bold xs:text-2xl md:text-3xl '>Profile Info</h1>
 
           <div className='flex gap-3 items-center'>
             <i className={`fa-solid ${showForm ? 'fa-x':'fa-pen'}`} onClick={()=>{setShowForm((prev)=>!prev); setDeleteSection(false);}}></i>
@@ -98,7 +99,7 @@ const UserProfile = () => {
 
         <div className='flex flex-col gap-3'>
 
-        <h3 className='font-bold text-lg'>Name</h3>
+        <h3 className='font-bold lg:text-lg'>Name</h3>
         
         <p>Password</p>
         <p>Email</p>
@@ -108,7 +109,7 @@ const UserProfile = () => {
 
         {showForm && (
 
-        <div className='mt-12'>          
+        <div className='mt-12 '>          
 
           <form action="" onSubmit={(e)=>editProfile(e)} className=' flex flex-col gap-5'>
 
@@ -141,11 +142,12 @@ const UserProfile = () => {
 
       </div>
 
-      <div className='flex flex-col items-center w-1/2'>
+      <div className='flex flex-col items-center xs:h-72 lg:h-screen xs:w-full lg:w-1/2'>
 
-        <h3 className='font-bold text-3xl mb-12'>Adopted Animals</h3>
+        <h3 className='font-bold xs:text-2xl md:text-3xl xs:mb-6 lg:mb-12'>Adopted Animals</h3>
         {
           //adoptedAnimals.map((animal)=>(
+            //infinite scroll
 
             <div className='flex justify-evenly w-full pb-2 border-b border-black '>
               <h3>name</h3>

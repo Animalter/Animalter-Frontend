@@ -236,8 +236,8 @@ const AdminPanel = () => {
 
   useEffect(()=>{
 
-    if(cookie.role && cookie.role=="admin") showData();
-    else navigate("/login");
+    //if(cookie.role && cookie.role=="admin") showData();
+    //else navigate("/login");
     
   },[])
 
@@ -262,14 +262,14 @@ const AdminPanel = () => {
 
       <ToastContainer position="top-right" autoClose={5000} />
 
-      <h1 className='font-bold text-3xl text-center'>Admin Panel</h1>
+      <h1 className='font-bold xs:text-2xl lg:text-3xl text-center'>Admin Panel</h1>
 
       {showPopup && (
 
 
       <div className='absolute z-20 w-full h-full backdrop-blur-sm flex flex-col  items-center'>  
 
-      <div className='relative w-2/3 h-3/4 mx-auto bg-[#d8e2dc] flex flex-col justify-center px-8 rounded-xl'> 
+      <div className='relative xs:w-9/10 lg:w-2/3 xs:h-1/2 lg:h-3/4 mx-auto bg-[#d8e2dc] flex flex-col justify-center px-8 rounded-xl'> 
        
        <i className='fa-solid fa-x absolute right-3 top-3' onClick={()=>setShowPopup(false)}></i>
         
@@ -342,9 +342,9 @@ const AdminPanel = () => {
 
       )}
 
-      <div className='w-3/4 mx-auto flex divide-x-2 divide-black mt-10'>
+      <div className='xs:w-9/10 md:w-4/5 lg:w-3/4 mx-auto flex xs:flex-col lg:flex-row xs:gap-16 lg:gap-0 lg:divide-x-2 divide-black mt-10'>
 
-      <div className='w-1/2 pr-5'>
+      <div className='xs:w-full lg:w-1/2 lg:pr-5'>
         <div className='flex justify-center gap-5 mb-8'>
           <h5 className={`text-lg ${operationType=="animal" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>changeOperation("animal")}>Animal</h5>
           <h5 className={`text-lg ${operationType=="user" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>changeOperation("user")}>User</h5>
@@ -399,7 +399,7 @@ const AdminPanel = () => {
 
       </div>
 
-      <div className='w-1/2 pl-5'>
+      <div className='xs:w-full lg:w-1/2 lg:pl-5'>
 
         <div className='flex flex-col items-end'>
 

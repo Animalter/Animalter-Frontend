@@ -12,7 +12,7 @@ const HeroBanner = () => {
 
         <h1 className='xs:text-3xl lg:text-4xl font-extrabold text-white'>You are Right Place <br /> for Faithful Friend</h1>
 
-        <button className='text-white xs:px-2 xs:py-1 lg:px-3 py-2 bg-[#FF566A] rounded-full border border-white hover:border-[#FF566A]' onClick={()=>navigate("/explorer")}>Find a Friend</button>
+        <button className='text-white xs:px-2 xs:py-1 lg:px-3 lg:py-2 bg-[#FF566A] rounded-full border border-white hover:border-[#FF566A]' onClick={()=>navigate("/explorer")}>Find a Friend</button>
       
       </div>
 

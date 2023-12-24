@@ -15,13 +15,13 @@ const Header = () => {
   
 
   return (
-    <header className='bg-[#0093E9]  text-white w-full flex xs:flex-col lg:flex-row items-center justify-between px-8'>
+    <header className='bg-[#0093E9] sticky top-0 z-10 text-white w-full flex xs:flex-col lg:flex-row items-center justify-between xs:px-8 lg:px-2'>
 
      <div className='xs:w-full lg:w-4/5 lg:mx-auto h-16 flex items-center justify-between'>
       
       <Link to="/">
       <div className='flex items-center gap-3 '>
-        <ReactSVG src={Logo} />
+        <ReactSVG src={Logo}/>
 
         <h1 className='text-xl font-bold'>Animalter</h1>
 
