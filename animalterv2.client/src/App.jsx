@@ -22,6 +22,8 @@ function App() {
     //infinite scroll ?
     //update redux
     //fake data 
+    //carousel ayrı bir componnent ?
+    
 
     return (
         <div>

@@ -2,12 +2,17 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import AnimalCard from '../components/AnimalCard';
 import Example from '../assets/animalter-example-img.jpg'
+import { useEffect } from 'react'
 
 const AnimalType = () => {
 
   const params =useParams();
   const parameteres=params.animaltype.split("-");
   const animalsbygenus=[];
+
+  useEffect(()=>{
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  },[])
 
   //carousel
   //data boyutuna göre infinite scroll kullanılabilir

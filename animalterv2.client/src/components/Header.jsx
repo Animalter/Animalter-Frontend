@@ -51,7 +51,7 @@ const Header = () => {
 
       </nav>
 
-      <i onClick={()=>setMobileMenu((prev)=>!prev)} class={`${mobileMenu ? 'fa-x':'fa-bars'} xs:block lg:hidden fa-solid `}></i>
+      <i onClick={()=>setMobileMenu((prev)=>!prev)} className={`${mobileMenu ? 'fa-x':'fa-bars'} xs:block lg:hidden fa-solid `}></i>
 
       </div> 
 

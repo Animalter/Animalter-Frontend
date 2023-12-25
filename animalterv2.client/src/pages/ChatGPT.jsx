@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useEffect } from 'react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react';
 
@@ -83,6 +84,10 @@ function App() {
       setIsTyping(false);
     });
   }
+
+  useEffect(()=>{
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  },[])
 
   return (
     <div className="App flex justify-center ">

@@ -2,10 +2,15 @@ import React from 'react'
 import HeroBanner from '../components/homepage/HeroBanner'
 import FilterAnimal from '../components/homepage/FilterAnimal'
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 const HomePage = () => {
 
   const navigate=useNavigate();
+
+  useEffect(()=>{
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  },[])
 
   return (
     <div>     

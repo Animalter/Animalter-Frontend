@@ -25,8 +25,10 @@ const ExplorerPage = () => {
 useEffect(()=>{
 
   getAnimal();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 
 },[])
+
 
   return (
     <div className='my-8 px-8'>
