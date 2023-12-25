@@ -15,6 +15,7 @@ export default {
       'filter-field': "url('./src/assets/filterfield-bg.jpg')",
       'filter-field-responsive':"url('./src/assets/filterfield-bg-responsive.jpg')",
       'login-register-bg':"url('./src/assets/login-register-bg.jpeg')",
+      'login-register-bg-responsive':"url('./src/assets/login-register-bg-responsive.jpeg')",
       'gpt-bg':"url('./src/assets/gpt-bg.jpg')"
     },
     height:{

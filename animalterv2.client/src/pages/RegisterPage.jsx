@@ -46,7 +46,7 @@ const RegisterPage = () => {
   }
 
   return (
-    <div className='flex flex-col gap-8 justify-center items-center h-156 w-full bg-login-register-bg bg-cover'>
+    <div className='flex flex-col gap-8 justify-center items-center xs:h-156 md:h-screen lg:h-156 w-full xs:bg-login-register-bg-responsive lg:bg-login-register-bg bg-cover'>
 
     <ToastContainer position="top-right" autoClose={5000} />
 

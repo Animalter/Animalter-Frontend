@@ -251,7 +251,7 @@ const AdminPanel = () => {
 
   useEffect(()=>{
 
-    //if(adoptFilter) data.filter((element)=>{element.adoptstate==adoptFilter})
+    if(adoptFilter) data.filter((element)=>{element.adoptstate==adoptFilter})
 
   },[adoptFilter])
   

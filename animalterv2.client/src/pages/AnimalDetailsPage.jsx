@@ -47,7 +47,7 @@ const AnimalDetailsPage = () => {
           <Image src={Example} className={"h-156"}/>
         </div>
 
-        <div className='flex flex-col xs:gap-6 lg:gap-0 justify-between max-w-md'>
+        <div className='flex flex-col xs:gap-6 lg:gap-0 justify-between lg:max-w-md'>
 
           <div>      
             <h3 className='text-lg font-semibold capitalize'>name</h3>

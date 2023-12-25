@@ -37,7 +37,7 @@ const LoginPage = () => {
   }
 
   return (
-    <div className='flex flex-col gap-8 justify-center items-center h-156 w-full bg-login-register-bg bg-cover'>
+    <div className='flex flex-col gap-8 justify-center items-center xs:h-156 md:h-screen lg:h-156 w-full xs:bg-login-register-bg-responsive lg:bg-login-register-bg bg-cover'>
 
       <h3 className='text-white font-bold text-3xl underline-offset-4 underline decoration-4'>LOGIN</h3>
 

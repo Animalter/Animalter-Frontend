@@ -19,7 +19,6 @@ import ChatGPT from './pages/ChatGPT'
 
 function App() {
 
-    //responsive design ?
     //infinite scroll ?
     //update redux
     //fake data 
