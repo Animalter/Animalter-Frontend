@@ -4,17 +4,24 @@ import Example from '../assets/animalter-example-img.jpg'
 import AnimalCard from '../components/AnimalCard'
 import axios from 'axios'
 import { useCookies } from 'react-cookie'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import { useGetAnimalByIdQuery } from '../store/slices/apiSlice'
+import Carousel from '../components/Carousel'
 
 
 const AnimalDetailsPage = () => {
 
   const [cookie,setCookie]=useCookies(['name']);
   const navigate=useNavigate();
+
+  const params=useParams();
+
+  const animalDetails=useGetAnimalByIdQuery(params.id);
+  
 
   const notifyAdopt = () => toast.success("We received your adopt request. We contact you as soon as possible");
   const notifyError = () => toast.success("Operation failed. Try again");
@@ -77,15 +84,7 @@ const AnimalDetailsPage = () => {
       <div className='xs:w-9/10 lg:w-3/4 mx-auto'>
         <h3 className='font-semibold text-lg my-5'>Similar</h3>
 
-        <Swiper  breakpoints={{320: {slidesPerView: 3,},720: {slidesPerView: 4,},1040: { slidesPerView: 5,},}}>
-
-          <SwiperSlide><AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/></SwiperSlide>
-          <SwiperSlide><AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/></SwiperSlide>
-          <SwiperSlide><AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/></SwiperSlide>
-          <SwiperSlide><AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/></SwiperSlide>
-          <SwiperSlide><AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/></SwiperSlide>
-          <SwiperSlide><AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/></SwiperSlide>
-        </Swiper>
+        <Carousel data={"same genus"}/>
 
         
 
@@ -94,16 +93,7 @@ const AnimalDetailsPage = () => {
       <div className='xs:w-9/10 lg:w-3/4 mx-auto'>
         <h3 className='font-semibold text-lg mb-5 mt-10'>Recommedations</h3>
 
-        <Swiper slidesPerView={5} >
-
-          { //recommended.map((animal)=>{
-
-          <SwiperSlide><AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/></SwiperSlide>
-
-          //}) 
-          }
-          
-        </Swiper>
+        <Carousel data={"same type"}/>
 
       </div>
       

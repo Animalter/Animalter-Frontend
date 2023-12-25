@@ -2,9 +2,9 @@ import React from 'react'
 import Image from '../components/Image'
 import { Link } from 'react-router-dom'
 
-const AnimalCard = ({name,type,genus,age,image}) => {
+const AnimalCard = ({name,type,genus,age,image,id}) => {
   return (
-    <Link to={`/animal/${type}/id`}>
+    <Link to={`/animal/${type}/${id}`}>
     <div className='relative xs:h-48 lg:h-60 xs:w-24 lg:w-36'>
 
         <div className='absolute top-0 left-0 '>

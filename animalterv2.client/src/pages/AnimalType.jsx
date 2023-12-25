@@ -25,7 +25,7 @@ const AnimalType = () => {
         <h3 className='font-semibold text-lg capitalize'>Genus 1</h3>
         {
           //animalsbygenus.map((animal)=>(
-            <AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/>
+            <AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example} id={"1"}/>
           //))
 
         }

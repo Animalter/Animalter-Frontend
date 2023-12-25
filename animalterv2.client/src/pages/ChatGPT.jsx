@@ -104,18 +104,18 @@ function App() {
               })}
             </MessageList>       
           </ChatContainer>
-          <div className='my-5 xs:px-1 lg:px-4 xs:w-1/2 lg:w-1/4 flex flex-col justify-start items-center gap-5 border-r-2 border-black '>
+          <div className='my-5 xs:px-1 lg:px-4 xs:w-1/3 lg:w-1/4 flex flex-col justify-start items-center gap-5 border-r-2 border-black '>
 
-            <button onClick={()=>handleSend("Sosyal ve Dost Canlısı biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Sosyal ve Dost Canlısı</button>
-            <button onClick={()=>handleSend("Enerjik ve Maceraperest biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Enerjik ve Maceraperest</button>
-            <button onClick={()=>handleSend("Düzenli ve Sorumluluk Sahibi biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Düzenli ve Sorumluluk Sahibi</button>          
-            <button onClick={()=>handleSend("Enerjik ve Coşkulu biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Enerjik ve Coşkulu</button>
-            <button onClick={()=>handleSend("Sakin ve Meditatif biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Sakin ve Meditatif</button>
-            <button onClick={()=>handleSend("Mücadeleci ve Cesur biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Mücadeleci ve Cesur</button>
-            <button onClick={()=>handleSend("Arkadaş Canlısı ve Toplumcu biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Arkadaş Canlısı ve Toplumcu</button>
-            <button onClick={()=>handleSend("Yaratıcı ve Farklılık Arayan biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Yaratıcı ve Farklılık Arayan</button>
-            <button onClick={()=>handleSend("Duygusal ve Hassas biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Duygusal ve Hassas</button>
-            <button onClick={()=>handleSend("Aktif ve Sporcu biri nasıl bir hayvan sahiplenmeli")} className='w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Aktif ve Sporcu</button>
+            <button onClick={()=>handleSend("What kind of pet should a social and friendly person adopt?")} className='xs:text-sm md:text-lg w-full xs:p-1 lg:p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Social and Friendly</button>
+            <button onClick={()=>handleSend("What kind of pet should a energetic and adventurous person adopt?")} className='xs:text-sm md:text-lg w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Energetic and Adventurous</button>
+            <button onClick={()=>handleSend("What kind of pet should a organized and responsible person adopt?")} className='xs:text-sm md:text-lg w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Organized and Responsible</button>          
+            <button onClick={()=>handleSend("What kind of pet should a energetic and enthusiastic person adopt?")} className='xs:text-sm md:text-lg w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Energetic and Enthusiastic</button>
+            <button onClick={()=>handleSend("What kind of pet should a calm and meditative person adopt?")} className='xs:text-sm md:text-lg w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Calm and Meditative</button>
+            <button onClick={()=>handleSend("What kind of pet should a fighting and brave person adopt?")} className='xs:text-sm md:text-lg w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Fighting and Brave</button>
+            <button onClick={()=>handleSend("What kind of pet should a friendly and sociable person adopt?")} className='xs:text-sm md:text-lg w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Friendly and Sociable</button>
+            <button onClick={()=>handleSend("What kind of pet should a creative and seeking difference person adopt?")} className='xs:text-sm md:text-lg w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Creative and Seeking Difference</button>
+            <button onClick={()=>handleSend("What kind of pet should a emotional and sensitive person adopt?")} className='xs:text-sm md:text-lg w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Emotional and Sensitive</button>
+            <button onClick={()=>handleSend("What kind of pet should a active and athlete person adopt?")} className='xs:text-sm md:text-lg w-full p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]'>Active and Athlete</button>
             
           </div>
           

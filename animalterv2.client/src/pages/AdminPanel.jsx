@@ -5,6 +5,7 @@ import Select from "react-select"
 import { useCookies } from 'react-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useGetAnimalsQuery, useGetUsersQuery } from '../store/slices/apiSlice';
 
 const AdminPanel = () => {
 
@@ -12,12 +13,23 @@ const AdminPanel = () => {
   const navigate=useNavigate();
   const [cookie,setCookie]=useCookies(['role']);
 
+  
+
   const [selectedTab,setSelectedTab]=useState("animal");
   const [operationType,setOperationType]=useState("animal");
   const [showPopup,setShowPopup]=useState(false);
   const [selectedId,setSelectedId]=useState("");
   const [adoptFilter,setAdoptFilter]=useState("");
   const [data,setData]=useState();
+
+  
+  let info;
+
+  if(selectedTab=="user") info=useGetUsersQuery();
+  else if(selectedTab=="admin") info="";
+  else info=useGetAnimalsQuery();
+
+  
 
   const notifyAdd = () => toast.success("Registry Added");
   const notifyUpdate = () => toast.success("Registry Updated");
@@ -79,15 +91,13 @@ const AdminPanel = () => {
 
   const showData=()=>{
 
-    axios.get("http://localhost:8641/Customer").then((res)=>{
+    // let info;
 
-      setData(res.data);
+    // if(selectedTab=="user") info=useGetUsersQuery();
+    // else if(selectedTab=="admin") info="";
+    // else info=useGetAnimalsQuery();
 
-    }).catch((err)=>{
-
-      console.log(err);
-
-    })
+    // setData(info);
 
   }
 
@@ -236,14 +246,14 @@ const AdminPanel = () => {
 
   useEffect(()=>{
 
-    //if(cookie.role && cookie.role=="admin") showData();
-    //else navigate("/login");
+    if(cookie.role && cookie.role=="admin") showData();
+    else navigate("/login");
     
   },[])
 
   useEffect(()=>{
 
-    showData();
+
     setSelectedId("");
     resetStates();
 
@@ -251,7 +261,7 @@ const AdminPanel = () => {
 
   useEffect(()=>{
 
-    if(adoptFilter) data.filter((element)=>{element.adoptstate==adoptFilter})
+    if(adoptFilter) info.data.filter((element)=>{element.adoptstate==adoptFilter})
 
   },[adoptFilter])
   
@@ -274,10 +284,8 @@ const AdminPanel = () => {
        <i className='fa-solid fa-x absolute right-3 top-3' onClick={()=>setShowPopup(false)}></i>
         
         <div className='flex justify-center gap-5 mb-8'>
-          <h5 className={`text-lg ${selectedTab=="animal" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>setSelectedTab("animal")}>Animal</h5>
-          <h5 className={`text-lg ${selectedTab=="user" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>setSelectedTab("user")}>User</h5>
-          <h5 className={`text-lg ${selectedTab=="admin" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>setSelectedTab("admin")}>Admin</h5> 
-
+          <h5 className="text-lg capitalize font-semibold underline underline-offset-4" >{selectedTab}</h5>
+          
         </div>
 
         {(selectedTab=="user" || selectedTab=="admin") && (
@@ -422,7 +430,7 @@ const AdminPanel = () => {
           {/* infinite scroll ile data göster */}
           {
             
-            //data.map((element)=>(
+            //info.data.map((element)=>(
               <div className='flex justify-evenly border-b border-black pb-2'>
                 <h3 className='font-bold text-lg'>element.name</h3>
 
