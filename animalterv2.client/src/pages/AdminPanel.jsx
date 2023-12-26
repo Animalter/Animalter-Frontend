@@ -246,8 +246,8 @@ const AdminPanel = () => {
 
   useEffect(()=>{
 
-    if(cookie.role && cookie.role=="admin") showData();
-    else navigate("/login");
+    //if(cookie.role && cookie.role=="admin") showData();
+    //else navigate("/login");
     
   },[])
 

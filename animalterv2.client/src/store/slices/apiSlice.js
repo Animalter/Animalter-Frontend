@@ -12,8 +12,8 @@ export const animalApi = createApi({
     getAnimalByType: builder.query({ query: (type) => `v1/charts/country?country_code=${type}` }),
     getAnimalByGenus: builder.query({ query: (genus) => `v1/search/multi?search_type=SONGS_ARTISTS&query=${genus}` }),
     getAnimals: builder.query({ query: () => `Animal` }),
-    getUsers: builder.query({ query: ({ songid }) => `Customer` }),
-    getSongRelated: builder.query({ query: ({ songid }) => `v1/tracks/related?track_id=${songid}` }),
+    getUsers: builder.query({ query: () => `User` }),
+    getUserById: builder.query({ query: (id) => `User/GetUserById?Id=${id}` }),
   }),
 });
 
@@ -24,5 +24,5 @@ export const {
   useGetAnimalByGenusQuery,
   useGetAnimalsQuery,
   useGetUsersQuery,
-  useGetSongRelatedQuery,
+  useGetUserByIdQuery,
 } = animalApi;

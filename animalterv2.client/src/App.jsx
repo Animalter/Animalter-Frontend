@@ -20,9 +20,9 @@ import ChatGPT from './pages/ChatGPT'
 function App() {
 
     //infinite scroll ?
-    //update redux
+    //update redux and createApi post section
     //fake data 
-    //createApi post kısmı
+    //siteyi canlıya alma ?
     
 
     return (

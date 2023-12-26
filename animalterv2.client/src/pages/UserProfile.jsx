@@ -1,25 +1,31 @@
 import React, { useEffect, useId, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useGetUserByIdQuery } from '../store/slices/apiSlice';
 
 const UserProfile = () => {
   
   const [showForm,setShowForm]=useState(false);
   const [deleteSection,setDeleteSection]=useState(false);
+  const [showPassword,setShowPassword]=useState(false);
 
   const id=useId();
   const navigate=useNavigate();
   const [cookie,setCookie]=useCookies(['name']);
+  const params=useParams();
 
   const notifyUpdate = () => toast.success("Profile Info Updated");
+
+  const profileInfo=useGetUserByIdQuery(params.id);
+  console.log(profileInfo);
   
-  const [name,setName]=useState("");
-  const [password,setPassword]=useState("");
-  const [email,setEmail]=useState("");
-  const [phone,setPhone]=useState("");
+  const [name,setName]=useState(profileInfo?.data?.userName || "");
+  const [password,setPassword]=useState(profileInfo?.data?.userPassword || "");
+  const [email,setEmail]=useState(profileInfo?.data?.mail || "");
+  const [phone,setPhone]=useState(profileInfo?.data?.phoneNumber || "");
 
   const changeName=(value)=>{ setName(value);  }
 
@@ -29,20 +35,20 @@ const UserProfile = () => {
 
   const changePhone=(value)=>{  setPhone(value);  }
 
-  const editProfile=(id)=>{
+  const editProfile=()=>{
 
     const data={
-      Id:id,
-      Name:name,
-      Password:password,
-      Email:email,
-      Phone:phone,
+      userId:profileInfo.data.userId,
+      userName:name,
+      userPassword:password,
+      mail:email,
+      phoneNumber:phone,
     }
-    const url=`/url/${id}`;
+    console.log(data);
+    const url=`http://localhost:5013/User`;
     axios.put(url,data).then((res)=>{
       
       notifyUpdate();    
-      setCookie('name',res.data.name)
 
     }).catch((err)=>{
       console.log(err);
@@ -50,9 +56,17 @@ const UserProfile = () => {
 
   }
 
-  const deleteProfile=(id)=>{
+  const deleteProfile=()=>{
 
-    axios.delete(`/url/${id}`).then((res)=>{
+    const data={
+      userId:profileInfo.data.userId,
+      userName:name,
+      userPassword:password,
+      mail:email,
+      phoneNumber:phone,
+    }
+
+    axios.delete(`http://localhost:5013/User`,data).then((res)=>{
       
       if(res.status===200)  navigate("/");
 
@@ -71,7 +85,7 @@ const UserProfile = () => {
 
   useEffect(()=>{
 
-    if(!cookie.role) navigate('/login');
+    //if(!cookie.role) navigate('/login');
 
   },[])
 
@@ -89,9 +103,13 @@ const UserProfile = () => {
           <h1 className='font-bold xs:text-2xl md:text-3xl '>Profile Info</h1>
 
           <div className='flex gap-3 items-center'>
-            <i className={`fa-solid ${showForm ? 'fa-x':'fa-pen'}`} onClick={()=>{setShowForm((prev)=>!prev); setDeleteSection(false);}}></i>
-            <i className={`fa-solid ${deleteSection ? 'fa-x':'fa-trash'}`} onClick={()=>{setDeleteSection((prev)=>!prev); setShowForm(false);}}></i>
-            <i class="fa-solid fa-right-from-bracket text-white p-1 rounded-lg bg-red-500" onClick={()=>logout()}></i>
+            <i className={`fa-solid ${showForm ? 'fa-x':'fa-pen'}`} onClick={()=>{setShowForm((prev)=>!prev); setDeleteSection(false); 
+                                                                                  changeName(profileInfo?.data?.userName); changePassword(profileInfo?.data?.userPassword);
+                                                                                  changeEmail(profileInfo?.data?.mail); changePhone(profileInfo?.data?.phoneNumber)}}></i>
+            <i className={`fa-solid ${deleteSection ? 'fa-x':'fa-trash'}`} onClick={()=>{setDeleteSection((prev)=>!prev); setShowForm(false);
+                                                                                         changeName(profileInfo?.data?.userName); changePassword(profileInfo?.data?.userPassword);
+                                                                                         changeEmail(profileInfo?.data?.mail); changePhone(profileInfo?.data?.phoneNumber)}}></i>
+            <i className="fa-solid fa-right-from-bracket text-white p-1 rounded-lg bg-red-500" onClick={()=>logout()}></i>
           </div>
           
           
@@ -99,11 +117,15 @@ const UserProfile = () => {
 
         <div className='flex flex-col gap-3'>
 
-        <h3 className='font-bold lg:text-lg'>Name</h3>
+        <h3 className='font-bold md:text-lg'>{profileInfo?.data?.userName}</h3>
         
-        <p>Password</p>
-        <p>Email</p>
-        <p>Phone</p>
+        <div className='flex items-center gap-4'>
+          <p className={`${showPassword ? 'text-black':'text-transparent'} md:text-lg`}>{profileInfo?.data?.userPassword}</p>
+          <i onClick={()=>setShowPassword((prev)=>!prev)} class={`fa-solid ${showPassword ? 'fa-lock-open':'fa-lock'} `}></i>
+        </div>
+        
+        <p className='md:text-lg'>{profileInfo?.data?.mail}</p>
+        <p className='md:text-lg'>{profileInfo?.data?.phoneNumber}</p>
 
         </div>
 
@@ -121,7 +143,7 @@ const UserProfile = () => {
        
             <input type="tel" id={id+'phone'} value={phone} onChange={(e)=>changePhone(e.target.value)} pattern='[0]{1}[5]{1}[0-9]{9}' placeholder='Enter Your Phone Number' className='px-3 py-1 rounded-full border border-black outline-none'/>
        
-            <button onClick={()=>editProfile("id")} className='w-full p-2 rounded-full text-white bg-[#009D69] border border-white hover:border-[#009D69]'>Update</button>               
+            <button onClick={()=>editProfile()} className='w-full p-2 rounded-full text-white bg-[#009D69] border border-white hover:border-[#009D69]'>Update</button>               
 
           </form>
 
@@ -135,7 +157,7 @@ const UserProfile = () => {
 
             <p className='font-bold mt-12 text-center mb-5'>Are You Sure Delete This Profile</p>
 
-            <button onClick={()=>deleteProfile("id")} className='w-full p-2 rounded-full text-white bg-[#FF566A] border border-white hover:border-[#FF566A]'>Delete</button>
+            <button onClick={()=>deleteProfile()} className='w-full p-2 rounded-full text-white bg-[#FF566A] border border-white hover:border-[#FF566A]'>Delete</button>
 
           </div>
         )}

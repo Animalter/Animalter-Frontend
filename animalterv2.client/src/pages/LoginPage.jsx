@@ -45,9 +45,9 @@ const LoginPage = () => {
 
         <form action="" onSubmit={(e)=>login(e)} className='flex flex-col gap-3'>
               
-          <input type="text" id={id+'name'} value={name} onChange={(e)=>changeName(e.target.value)} placeholder='Enter Your Name' className='px-3 py-1 rounded-full border border-black outline-none'/>          
+          <input required type="text" id={id+'name'} value={name} onChange={(e)=>changeName(e.target.value)} placeholder='Enter Your Name or Email' className='px-3 py-1 rounded-full border border-black outline-none'/>          
                          
-          <input type="password" name="" id={id+'password'} value={password} onChange={(e)=>changePassword(e.target.value)}  placeholder='Enter Your Password' className='px-3 py-1 rounded-full border border-black outline-none' />
+          <input required type="password" name="" id={id+'password'} value={password} onChange={(e)=>changePassword(e.target.value)}  placeholder='Enter Your Password' className='px-3 py-1 rounded-full border border-black outline-none' />
 
           <button onClick={login} className='w-full p-2 rounded-full text-white bg-[#009D69] border border-white hover:border-[#009D69]'>Login</button>
 
