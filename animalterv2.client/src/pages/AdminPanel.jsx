@@ -79,9 +79,11 @@ const AdminPanel = () => {
     setAnimalName("");
     setType("");
     setGenus("");
-    setAge();
+    setAge("");
     setImage("");
     setAdoptState("");
+    setGender("");
+    setAbout("");
   }
 
   const adoptStates=[
@@ -148,19 +150,30 @@ const AdminPanel = () => {
 
   const editData=(id)=>{
 
-    axios.get(`/url/${id}`).then((res)=>{
+    const animalUrl=`http://localhost:5013/Animal/GetAnimalById?Id=${id}`;
+    const personUrl=`http://localhost:5013/User/GetUserById?Id=${id}`;
+    let url;
+
+    if(selectedTab=="animal") url=animalUrl
+    else url=personUrl
+
+    axios.get(url).then((res)=>{
 
       if(selectedTab=="animal"){
-        setAnimalName(res.data.name);
-        setType(res.data.type);
-        setGenus(res.data.genus);
-        setAge(res.data.age)
-        setAdoptState(res.data.adoptState)
+        setAnimalName(res.data.animalName);
+        //setType(res.data.type);
+        setGenus(res.data.genusId);
+        setAge(res.data.animalAgeYear)
+        //setAdoptState(res.data.adoptState)
+        setGender(res.data.animalGender)
+        setAbout(res.data.animalAbout)
+        setShowPopup(true);
       }else{
-        setName(res.data.name)
-        setPassword(res.data.password)
-        setEmail(res.data.email)
-        setPhone(res.data.phone)
+        setName(res.data.userName)
+        setPassword(res.data.userPassword)
+        setEmail(res.data.mail)
+        setPhone(res.data.phoneNumber)
+        setShowPopup(true);
       }
     })
 
@@ -270,7 +283,7 @@ const AdminPanel = () => {
   
 
   return (
-    <div className='relative lg:h-screen my-6'>
+    <div className='relative my-6'>
 
       <ToastContainer position="top-right" autoClose={5000} />
 
@@ -283,7 +296,7 @@ const AdminPanel = () => {
 
       <div className='relative xs:w-9/10 lg:w-2/3 xs:h-2/3 lg:h-3/4 mx-auto bg-[#d8e2dc] flex flex-col justify-center px-8 rounded-xl'> 
        
-       <i className='fa-solid fa-x absolute right-3 top-3' onClick={()=>setShowPopup(false)}></i>
+       <i className='fa-solid fa-x absolute right-3 top-3' onClick={()=>{setShowPopup(false); resetStates()}}></i>
         
         <div className='flex justify-center gap-5 mb-8'>
           <h5 className="text-lg capitalize font-semibold underline underline-offset-4" >{selectedTab}</h5>
@@ -292,7 +305,7 @@ const AdminPanel = () => {
 
         {(selectedTab=="user" ) && (
 
-        <form action="" onSubmit={(e)=>register(e)} className='flex flex-col gap-3'>
+        <form action="" className='flex flex-col gap-3'>
             
           <input required type="text" id={id+'name'} value={name} onChange={(e)=>changeName(e.target.value)} placeholder='Enter Name' className='px-3 py-1 rounded-full border border-black outline-none'/>          
                        
@@ -315,9 +328,9 @@ const AdminPanel = () => {
 
         {selectedTab=="animal" && (
 
-          <form action="" onSubmit={(e)=>register(e)} className='flex flex-col gap-3'>
+          <form action=""  className='flex flex-col gap-3'>
             
-            <input required type="text" id={id+'animalName'} value={name} onChange={(e)=>changeAnimalName(e.target.value)} placeholder="Enter Animal's Name" className='px-3 py-1 rounded-full border border-black outline-none'/>          
+            <input required type="text" id={id+'animalName'} value={animalName} onChange={(e)=>changeAnimalName(e.target.value)} placeholder="Enter Animal's Name" className='px-3 py-1 rounded-full border border-black outline-none'/>          
 
             <input required type="text" id={id+'type'} value={type} onChange={(e)=>changeType(e.target.value)} placeholder="Enter Animal's Type" className='px-3 py-1 rounded-full border border-black outline-none'/>          
 
@@ -358,9 +371,9 @@ const AdminPanel = () => {
 
       )}
 
-      <div className='xs:w-9/10 md:w-4/5 lg:w-3/4 mx-auto flex xs:flex-col lg:flex-row xs:gap-16 lg:gap-0 lg:divide-x-2 divide-black mt-10'>
+      <div className='xs:w-9/10 md:w-4/5 mx-auto flex flex-col  gap-16 mt-10'>
 
-      <div className='xs:w-full lg:w-1/2 lg:pr-5'>
+      <div className='xs:w-full lg:w-1/2 mx-auto lg:pr-5'>
         <div className='flex justify-center gap-5 mb-8'>
           <h5 className={`text-lg ${operationType=="animal" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>changeOperation("animal")}>Animal</h5>
           <h5 className={`text-lg ${operationType=="user" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>changeOperation("user")}>Person</h5>       
@@ -420,7 +433,7 @@ const AdminPanel = () => {
 
       </div>
 
-      <div className='xs:w-full lg:w-2/3 lg:pl-5 xs:mb-10 md:mb-0'>
+      <div className='w-full mx-auto mb-10 '>
 
         <div className='flex flex-col items-end'>
 
@@ -443,13 +456,13 @@ const AdminPanel = () => {
 
         {selectedTab=="animal" && (
 
-          <AnimalTable data={animalInfo?.data} editData={editData} selectedId={selectedId} setSelectedId={setSelectedId} setShowPopup={()=>setShowPopup()} />
+          <AnimalTable data={animalInfo?.data} editData={editData} state={"admin"}/>
             
         )}
 
         {selectedTab=="user" && (
 
-          <PersonTable data={personInfo?.data} editData={editData} selectedId={selectedId} setSelectedId={setSelectedId} setShowPopup={()=>setShowPopup()}/>
+          <PersonTable data={personInfo?.data} editData={editData}/>
             
         )}
           

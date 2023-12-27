@@ -65,6 +65,8 @@ const AnimalDetailsPage = () => {
             <p className='capitalize'>type</p>
             <p className='capitalize'>genus</p>
             <p>{animalDetails?.data?.animalAgeYear} Year</p>
+            <p className='capitalize'>{animalDetails?.data?.animalGender}</p>
+
           </div>
           
           <div>

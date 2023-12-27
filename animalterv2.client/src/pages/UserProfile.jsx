@@ -5,6 +5,7 @@ import { useCookies } from 'react-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useGetUserByIdQuery } from '../store/slices/apiSlice';
+import AnimalTable from '../components/AnimalTable';
 
 const UserProfile = () => {
   
@@ -121,7 +122,7 @@ const UserProfile = () => {
         
         <div className='flex items-center gap-4'>
           <p className={`${showPassword ? 'text-black':'text-transparent'} md:text-lg`}>{profileInfo?.data?.userPassword}</p>
-          <i onClick={()=>setShowPassword((prev)=>!prev)} class={`fa-solid ${showPassword ? 'fa-lock-open':'fa-lock'} `}></i>
+          <i onClick={()=>setShowPassword((prev)=>!prev)} className={`fa-solid ${showPassword ? 'fa-lock-open':'fa-lock'} `}></i>
         </div>
         
         <p className='md:text-lg'>{profileInfo?.data?.mail}</p>
@@ -167,21 +168,9 @@ const UserProfile = () => {
       <div className='flex flex-col items-center xs:h-72 lg:h-screen xs:w-full lg:w-1/2'>
 
         <h3 className='font-bold xs:text-2xl md:text-3xl xs:mb-6 lg:mb-12'>Adopted Animals</h3>
-        {
-          //adoptedAnimals.map((animal)=>(
-            //infinite scroll
 
-            <div className='flex justify-evenly w-full pb-2 border-b border-black '>
-              <h3>name</h3>
-              <p>type</p>
-              <p>genus</p>
-              <p>age</p>
-              <p>adopt state</p>
-
-            </div>
-
-          //))
-        }
+          <AnimalTable data={[]} state={"profile"} />
+        
       </div>     
       
       
