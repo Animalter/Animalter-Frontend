@@ -7,8 +7,7 @@ import { useCookies } from 'react-cookie'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
+
 import { useGetAnimalByIdQuery } from '../store/slices/apiSlice'
 import Carousel from '../components/Carousel'
 
@@ -21,6 +20,7 @@ const AnimalDetailsPage = () => {
   const params=useParams();
 
   const animalDetails=useGetAnimalByIdQuery(params.id);
+  console.log(animalDetails);
   
 
   const notifyAdopt = () => toast.success("We received your adopt request. We contact you as soon as possible");
@@ -61,18 +61,15 @@ const AnimalDetailsPage = () => {
         <div className='flex flex-col xs:gap-6 lg:gap-0 justify-between lg:max-w-md'>
 
           <div>      
-            <h3 className='text-lg font-semibold capitalize'>name</h3>
+            <h3 className='text-lg font-semibold capitalize'>{animalDetails?.data?.animalName}</h3>
             <p className='capitalize'>type</p>
             <p className='capitalize'>genus</p>
-            <p>age</p>
+            <p>{animalDetails?.data?.animalAgeYear} Year</p>
           </div>
           
           <div>
             <h6 className='font-semibold text-lg'>Explication</h6>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi natus, hic ipsa ullam fugiat, veniam aperiam quas aspernatur soluta, quis quisquam! Illum, adipisci est rerum asperiores id velit? Quaerat, id.
-            Eius dolorum quam natus at. Quaerat voluptatum voluptatibus unde itaque saepe ipsam, dolore corporis accusamus est aperiam numquam molestiae aspernatur porro impedit molestias nihil odit ullam autem. Doloribus, aliquid dolorum?
-            Quas maiores ipsum esse voluptate debitis expedita velit nesciunt cum, labore ullam accusantium, error laudantium? Accusantium, fuga velit. Ex cum eum dolores quisquam? Facilis quasi, laboriosam cupiditate adipisci magni sit.
-            Beatae molestiae labore perferendis maiores sint impedit delectus aut sit pariatur eveniet harum numquam laboriosam veritatis eligendi esse neque laborum quasi, sed aliquam dolorum. Veritatis ea est qui eius quam..</p>
+            <p>{animalDetails?.data?.animalAbout}</p>
           </div>
 
           <button disabled={"animal.adopt=='adopted' "} onClick={()=>adoptAnimal("animal.id","user.id")} className='w-full text-white p-2 border border-white bg-[#009D69] rounded-full hover:border-[#009D69]'>Adopt</button>
@@ -84,7 +81,7 @@ const AnimalDetailsPage = () => {
       <div className='xs:w-9/10 lg:w-3/4 mx-auto'>
         <h3 className='font-semibold text-lg my-5'>Similar</h3>
 
-        <Carousel data={"same genus"}/>
+        <Carousel data={[]}/>
 
         
 
@@ -93,7 +90,7 @@ const AnimalDetailsPage = () => {
       <div className='xs:w-9/10 lg:w-3/4 mx-auto'>
         <h3 className='font-semibold text-lg mb-5 mt-10'>Recommedations</h3>
 
-        <Carousel data={"same type"}/>
+        <Carousel data={[]}/>
 
       </div>
       

@@ -1,11 +1,14 @@
-import React, { useEffect, useId, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useId, useMemo, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import Select from "react-select"
 import { useCookies } from 'react-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useGetAnimalsQuery, useGetUsersQuery } from '../store/slices/apiSlice';
+import AnimalTable from '../components/AnimalTable';
+import PersonTable from '../components/PersonTable';
+
 
 const AdminPanel = () => {
 
@@ -22,14 +25,10 @@ const AdminPanel = () => {
   const [adoptFilter,setAdoptFilter]=useState("");
   const [data,setData]=useState();
 
-  
-  let info;
-
-  if(selectedTab=="user") info=useGetUsersQuery();
-  else if(selectedTab=="admin") info="";
-  else info=useGetAnimalsQuery();
-
-  
+    
+  const personInfo = useGetUsersQuery();
+  const animalInfo=useGetAnimalsQuery();
+   
 
   const notifyAdd = () => toast.success("Registry Added");
   const notifyUpdate = () => toast.success("Registry Updated");
@@ -47,6 +46,9 @@ const AdminPanel = () => {
   const [age,setAge]=useState();
   const [image,setImage]=useState("");
   const [adoptState,setAdoptState]=useState("");
+  const [gender,setGender]=useState("");
+  const [about,setAbout]=useState();
+
 
   const changeName=(value)=>{  setName(value);  }
 
@@ -88,50 +90,52 @@ const AdminPanel = () => {
     {value:"waiting",label:"Waiting"},
   ]
 
-
-  const showData=()=>{
-
-    // let info;
-
-    // if(selectedTab=="user") info=useGetUsersQuery();
-    // else if(selectedTab=="admin") info="";
-    // else info=useGetAnimalsQuery();
-
-    // setData(info);
-
-  }
-
   const addData=()=>{
 
-    const url="";
+    const personUrl="http://localhost:5013/User";
+    const animalUrl="http://localhost:5013/Animal";
     let data;
+    let url;
 
     const animalData={
-      Name:animalName,
-      Type:type,
-      Genus:genus,
-      Age:age,
-      Image:image,
-      AdoptState:adoptState,
+      animalName:animalName,
+      //Type:type,
+      //genus:genus,
+      animalAgeYear:age,
+      animalAgeMouth:0,
+      animaiImageUrl:"image",
+      //AdoptState:adoptState,
+      animalGender:gender,
+      animalAbout:about,
+      genusId:1,
 
     }
 
     const personData={
-      Name:name,
-      Password:password,
-      Email:email,
-      Phone:phone,
-      Role:operationType
+      userName:name,
+      userPassword:password,
+      mail:email,
+      phoneNumber:phone,
+      //userRoles:operationType,
+      roleId:1,
 
     }
 
-    if(operationType=="animal") data=animalData 
-    else data=personData
+    if(operationType=="animal") {
+      data=animalData;
+      url=animalUrl;
+    } 
+    else {
+      data=personData
+      url=personUrl;
+    }
+
+    console.log(data);
+    console.log(url);
 
     axios.post(url,data).then(()=>{
 
       notifyAdd();
-      showData();
       resetStates();
 
     }).catch((err)=>{
@@ -238,6 +242,12 @@ const AdminPanel = () => {
   
   };
 
+  const onChangeGender = (selectedOption) => {
+ 
+    setGender(selectedOption.value);  
+  
+  };
+
 
   const changeOperation=(value)=>{
 
@@ -253,22 +263,14 @@ const AdminPanel = () => {
 
   useEffect(()=>{
 
-
-    setSelectedId("");
-    resetStates();
-
-  },[selectedTab])
-
-  useEffect(()=>{
-
-    if(adoptFilter) info.data.filter((element)=>{element.adoptstate==adoptFilter})
+    if(adoptFilter) animalInfo.data.filter((element)=>{element.adoptstate==adoptFilter})
 
   },[adoptFilter])
   
   
 
   return (
-    <div className='relative h-screen my-6'>
+    <div className='relative lg:h-screen my-6'>
 
       <ToastContainer position="top-right" autoClose={5000} />
 
@@ -279,7 +281,7 @@ const AdminPanel = () => {
 
       <div className='absolute z-20 w-full h-full backdrop-blur-sm flex flex-col  items-center'>  
 
-      <div className='relative xs:w-9/10 lg:w-2/3 xs:h-1/2 lg:h-3/4 mx-auto bg-[#d8e2dc] flex flex-col justify-center px-8 rounded-xl'> 
+      <div className='relative xs:w-9/10 lg:w-2/3 xs:h-2/3 lg:h-3/4 mx-auto bg-[#d8e2dc] flex flex-col justify-center px-8 rounded-xl'> 
        
        <i className='fa-solid fa-x absolute right-3 top-3' onClick={()=>setShowPopup(false)}></i>
         
@@ -288,7 +290,7 @@ const AdminPanel = () => {
           
         </div>
 
-        {(selectedTab=="user" || selectedTab=="admin") && (
+        {(selectedTab=="user" ) && (
 
         <form action="" onSubmit={(e)=>register(e)} className='flex flex-col gap-3'>
             
@@ -321,11 +323,17 @@ const AdminPanel = () => {
 
             <input required type="text" id={id+'genus'} value={genus} onChange={(e)=>changeGenus(e.target.value)} placeholder="Enter Animal's Genus" className='px-3 py-1 rounded-full border border-black outline-none'/>          
 
-            <input required type="text" id={id+'age'} value={age} onChange={(e)=>changeAge(e.target.value)} placeholder="Enter Animal's Age" className='px-3 py-1 rounded-full border border-black outline-none'/>          
+            <input required type="text" id={id+'age'} value={age} onChange={(e)=>changeAge(e.target.value)} placeholder="Enter Animal's Age" className='px-3 py-1 rounded-full border border-black outline-none'/>   
+
+            <Select name="gender" value={gender} options={[{label:"Male",value:"male"},{label:"Female",value:"female"}]} getOptionLabel={(option) => option.label} 
+                    getOptionValue={(option) => option.value}  onChange={onChangeGender} placeholder={gender || "Select Gender"} 
+                    className="xs:w-1/2 lg:w-48 text-black rounded-lg border border-black"/>                 
 
             <Select name="adopt" value={adoptState} options={adoptStates} getOptionLabel={(option) => option.label} 
                     getOptionValue={(option) => option.value}  onChange={onChange} placeholder={adoptState || "Select State"} 
                     className="xs:w-1/2 lg:w-48 text-black rounded-lg border border-black"/>
+
+            <input required type="textarea" id={id+'about'} value={about} onChange={(e)=>setAbout(e.target.value)} placeholder="Write Animal About" className='px-3 py-1 rounded-full border border-black outline-none'/>   
             
             <input required style={{ display: "none" }} type="file" id={id+'image'} value={image} onChange={(e)=>changeImage(e.target.value)} placeholder="Enter Animal's Image" />
             <label htmlFor={id+'image'} className='flex gap-3 items-center '>
@@ -355,12 +363,11 @@ const AdminPanel = () => {
       <div className='xs:w-full lg:w-1/2 lg:pr-5'>
         <div className='flex justify-center gap-5 mb-8'>
           <h5 className={`text-lg ${operationType=="animal" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>changeOperation("animal")}>Animal</h5>
-          <h5 className={`text-lg ${operationType=="user" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>changeOperation("user")}>User</h5>
-          <h5 className={`text-lg ${operationType=="admin" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>changeOperation("admin")}>Admin</h5> 
+          <h5 className={`text-lg ${operationType=="user" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>changeOperation("user")}>Person</h5>       
 
         </div>
 
-        {(operationType=="user" || operationType=="admin") && (
+        {(operationType=="user") && (
 
         <form action="" onSubmit={(e)=>register(e)} className='flex flex-col gap-3'>
             
@@ -372,7 +379,7 @@ const AdminPanel = () => {
 
           <input required type="tel" id={id+'tel'} value={phone} onChange={(e)=>changePhone(e.target.value)} pattern='[0]{1}[5]{1}[0-9]{9}' placeholder='Enter Phone Number' className='px-3 py-1 rounded-full border border-black outline-none'/>          
 
-          <button className='w-full p-2 rounded-full text-white bg-[#009D69] border border-white hover:border-[#009D69]'>Add Person</button>       
+          <button onClick={()=>addData()} className='w-full p-2 rounded-full text-white bg-[#009D69] border border-white hover:border-[#009D69]'>Add Person</button>       
 
         </form>
 
@@ -380,9 +387,9 @@ const AdminPanel = () => {
 
         {operationType=="animal" && (
 
-          <form action="" onSubmit={(e)=>register(e)} className='flex flex-col gap-3'>
+          <form action=""  className='flex flex-col gap-3'>
             
-            <input required type="text" id={id+'animalName'} value={name} onChange={(e)=>changeAnimalName(e.target.value)} placeholder="Enter Animal's Name" className='px-3 py-1 rounded-full border border-black outline-none'/>          
+            <input required type="text" id={id+'animalName'} value={animalName} onChange={(e)=>changeAnimalName(e.target.value)} placeholder="Enter Animal's Name" className='px-3 py-1 rounded-full border border-black outline-none'/>          
 
             <input required type="text" id={id+'type'} value={type} onChange={(e)=>changeType(e.target.value)} placeholder="Enter Animal's Type" className='px-3 py-1 rounded-full border border-black outline-none'/>          
 
@@ -390,9 +397,15 @@ const AdminPanel = () => {
 
             <input required type="text" id={id+'age'} value={age} onChange={(e)=>changeAge(e.target.value)} placeholder="Enter Animal's Age" className='px-3 py-1 rounded-full border border-black outline-none'/>          
 
+            <Select name="gender" value={gender} options={[{label:"Male",value:"male"},{label:"Female",value:"female"}]} getOptionLabel={(option) => option.label} 
+                    getOptionValue={(option) => option.value}  onChange={onChangeGender} placeholder={gender || "Select Gender"} 
+                    className="xs:w-1/2 lg:w-48 text-black rounded-lg border border-black"/>                 
+
             <Select name="adopt" value={adoptState} options={adoptStates} getOptionLabel={(option) => option.label} 
                     getOptionValue={(option) => option.value}  onChange={onChange} placeholder={adoptState || "Select State"} 
                     className="xs:w-1/2 lg:w-48 text-black rounded-lg border border-black"/>
+
+            <input required type="textarea" id={id+'about'} value={about} onChange={(e)=>setAbout(e.target.value)} placeholder="Write Animal About" className='px-3 py-1 rounded-full border border-black outline-none'/> 
                     
             <input required style={{ display: "none" }} type="file" id={id+'image'} value={image} onChange={(e)=>changeImage(e.target.value)} placeholder="Enter Animal's Image" />
             <label htmlFor={id+'image'} className='flex gap-3 items-center '>
@@ -400,55 +413,46 @@ const AdminPanel = () => {
               <span className='font-semibold'>Add a Photo</span>
             </label>
 
-            <button className='w-full p-2 rounded-full text-white bg-[#009D69] border border-white hover:border-[#009D69]'>Add Animal</button>       
+            <button onClick={()=>addData()} className='w-full p-2 rounded-full text-white bg-[#009D69] border border-white hover:border-[#009D69]'>Add Animal</button>       
 
           </form>
         )}
 
       </div>
 
-      <div className='xs:w-full lg:w-1/2 lg:pl-5'>
+      <div className='xs:w-full lg:w-2/3 lg:pl-5 xs:mb-10 md:mb-0'>
 
         <div className='flex flex-col items-end'>
 
           <div className='w-full flex justify-center gap-5 pb-5'>
             <h5 className={`text-lg ${selectedTab=="animal" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>setSelectedTab("animal")}>Animals</h5>
-            <h5 className={`text-lg ${selectedTab=="user" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>setSelectedTab("user")}>Users</h5>
-            <h5 className={`text-lg ${selectedTab=="admin" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>setSelectedTab("admin")}>Admins</h5>
+            <h5 className={`text-lg ${selectedTab=="user" ? 'font-semibold underline-offset-4 underline':''}`} onClick={()=>setSelectedTab("user")}>Person</h5>
+           
           </div>
           {selectedTab=="animal" && (
 
           <Select name="adoptfilter" value={adoptFilter} options={adoptStates} getOptionLabel={(option) => option.label} 
                   getOptionValue={(option) => option.value}  onChange={onChangeFilter} placeholder={adoptFilter || "Select Filter"} 
-                  className="xs:w-1/2 lg:w-36 text-sm mb-3 text-black rounded-lg border border-black"/>
+                  className="xs:w-1/3 md:w-1/4 lg:w-36 xs:text-xs md:text-sm mb-3 text-black rounded-lg border border-black"/>
           
           )}
 
         </div>
 
         <div className='my-5'>
-          {/* infinite scroll ile data göster */}
-          {
+
+        {selectedTab=="animal" && (
+
+          <AnimalTable data={animalInfo?.data} editData={editData} selectedId={selectedId} setSelectedId={setSelectedId} setShowPopup={()=>setShowPopup()} />
             
-            //info.data.map((element)=>(
-              <div className='flex justify-evenly border-b border-black pb-2'>
-                <h3 className='font-bold text-lg'>element.name</h3>
+        )}
 
-                <p>Type</p>
-                <p>Genus</p>
-                <p>Age</p>
+        {selectedTab=="user" && (
 
-                <div className='flex gap-3'>
-                  <i className='fa-solid fa-pen' onClick={()=>{setSelectedId("data.id"); editData(selectedId);  setShowPopup(true);}}></i>
-                  <i className='fa-solid fa-trash' onClick={()=>{setSelectedId("data.id"); editData(selectedId); setShowPopup(true);}}></i>
-                </div>
-
-              </div>
-            //))
+          <PersonTable data={personInfo?.data} editData={editData} selectedId={selectedId} setSelectedId={setSelectedId} setShowPopup={()=>setShowPopup()}/>
             
-          }
+        )}
           
-
         </div>
 
       </div>

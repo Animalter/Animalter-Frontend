@@ -23,14 +23,16 @@ useEffect(()=>{
     <div className='my-8 px-8'>
 
       <h1 className='font-bold text-xl mb-8'>Explore New Friends</h1>
+      <div className='flex gap-12'>
       {
         
-        animals.data.map((animal)=>(
+        animals?.data?.map((animal)=>(
           
-          <AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example}/>
+          <AnimalCard id={animal.animalId} name={animal.animalName} type={"type"} genus={"genus"} age={animal.animalAgeYear} image={Example}/>
           
         ))
       }
+      </div>
       
     </div>
   )
