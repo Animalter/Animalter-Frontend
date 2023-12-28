@@ -1,7 +1,9 @@
 import React, { useId, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginPage = () => {
 
@@ -11,6 +13,8 @@ const LoginPage = () => {
   const id=useId();
   const navigate=useNavigate();
   const [cookie,setCookie]=useCookies(["name"]);
+
+  const notifyError = () => toast.error("Operation failed. Try again");
 
   const [name,setName]=useState("");
   const [password,setPassword]=useState("");
@@ -26,16 +30,18 @@ const LoginPage = () => {
       Name:name,
       Password:password,
     }
-    const url="/";
+    const url=`http://localhost:5013/Account/Login?UserName=${name}&Password=${password}`;
     axios.post(url,data).then((res)=>{
-      setCookie('name',name);
-      //setCookie('id',res.id);
-      //setCookie('role',res.role);
-      //setCookie('name',res.name)
+      setCookie('name',res.data.userName);
+      setCookie('id',res.data.userId);
+      setCookie('role',res.data.roleId);
+      console.log(res)
       
       navigate("/");
+
     }).catch((err)=>{
       console.log(err);
+      notifyError();
     });
 
   }
@@ -53,7 +59,7 @@ const LoginPage = () => {
                          
           <input required type="password" name="" id={id+'password'} value={password} onChange={(e)=>changePassword(e.target.value)}  placeholder='Enter Your Password' className='px-3 py-1 rounded-full border border-black outline-none' />
 
-          <button onClick={()=>login()} className='w-full p-2 rounded-full text-white bg-[#009D69] border border-white hover:border-[#009D69]'>Login</button>
+          <button onClick={(e)=>{e.preventDefault();login()}} className='w-full p-2 rounded-full text-white bg-[#009D69] border border-white hover:border-[#009D69]'>Login</button>
 
           <p className='text-white'>Do You Have Account ? <Link to="/register" className='font-bold' >Register</Link></p>
           <Link to="/forgotpassword" className='font-semibold text-white underline' >I Forgot My Password</Link>

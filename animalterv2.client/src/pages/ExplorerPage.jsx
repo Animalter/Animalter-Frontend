@@ -6,10 +6,11 @@ import { useGetAnimalsQuery } from '../store/slices/apiSlice';
 
 const ExplorerPage = () => {
 
-  const [data,setData]=useState([]);
-  //infinite scroll kullanılabilir
   const animals=useGetAnimalsQuery();
   console.log(animals)
+
+  const [genus,setGenus]=useState("");
+  const [type,setType]=useState("");
 
 
 useEffect(()=>{
@@ -26,11 +27,25 @@ useEffect(()=>{
       <div className='flex gap-12'>
       {
         
-        animals?.data?.map((animal)=>(
+        animals?.data?.map((animal,i)=>{
+
           
-          <AnimalCard id={animal.animalId} name={animal.animalName} type={"type"} genus={"genus"} age={animal.animalAgeYear} image={Example}/>
           
-        ))
+          axios.get(`http://localhost:5013/Genus/GetGenusById?Id=${animal.animalId}`).then((res)=>{
+            let genuss;
+          genuss=res.data.genuss
+          setGenus(genuss);
+          })
+          axios.get(`http://localhost:5013/Typee/GetTypeeById?Id=${animal.animalId}`).then((res)=>{
+            let typee;
+          typee=res.data.typeee
+          setType(typee);
+          })
+
+          return(
+          <AnimalCard key={i} id={animal.animalId} name={animal.animalName} type={type} genus={genus} age={animal.animalAgeYear} image={animal.animaiImageUrl }/>
+          )
+          })
       }
       </div>
       

@@ -9,6 +9,7 @@ import { useGetTypesQuery } from '../store/slices/apiSlice'
 const Header = () => {
 
   const [cookie,setCookie]=useCookies(['role','name','id']);
+  console.log(cookie.role);
   const [mobileMenu,setMobileMenu]=useState(false);
 
   const types=useGetTypesQuery();
@@ -39,10 +40,10 @@ const Header = () => {
         <NavLink to="/about" className={({ isActive }) => isActive ? 'text-black' : 'hover:underline underline-offset-4'}>About</NavLink>
         <NavLink to="/contact" className={({ isActive }) => isActive ? 'text-black' : 'hover:underline underline-offset-4'}>Contact</NavLink>
         <NavLink to="/faq" className={({ isActive }) => isActive ? 'text-black ' : 'hover:underline underline-offset-4'}>FAQ</NavLink>
-        {cookie.role=="user" && (
+        {cookie.role==1 && (
           <NavLink to={`/user/${cookie.id}`} className={({ isActive }) => isActive ? 'text-black ' : 'hover:underline underline-offset-4'}>{cookie.name}</NavLink>
         )}
-        {cookie.role=="admin" && (
+        {cookie.role==2 && (
           <NavLink to={`/admin/${cookie.id}`} className={({ isActive }) => isActive ? 'text-black ' : 'hover:underline underline-offset-4'}>Admin Panel</NavLink>
         )}
         {!cookie.role && (
@@ -67,10 +68,10 @@ const Header = () => {
         <NavLink to="/about" className={({ isActive }) => isActive ? 'text-black' : 'hover:underline underline-offset-4'}>About</NavLink>
         <NavLink to="/contact" className={({ isActive }) => isActive ? 'text-black' : 'hover:underline underline-offset-4'}>Contact</NavLink>
         <NavLink to="/faq" className={({ isActive }) => isActive ? 'text-black ' : 'hover:underline underline-offset-4'}>FAQ</NavLink>
-        {cookie.role=="user" && (
+        {cookie.role=="1" && (
           <NavLink to={`/user/${cookie.id}`} className={({ isActive }) => isActive ? 'text-black ' : 'hover:underline underline-offset-4'}>{cookie.name}</NavLink>
         )}
-        {cookie.role=="admin" && (
+        {cookie.role==2 && (
           <NavLink to={`/admin/${cookie.id}`} className={({ isActive }) => isActive ? 'text-black ' : 'hover:underline underline-offset-4'}>Admin Panel</NavLink>
         )}
         {!cookie.role && (

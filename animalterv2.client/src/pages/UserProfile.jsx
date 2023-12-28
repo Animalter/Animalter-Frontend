@@ -67,9 +67,14 @@ const UserProfile = () => {
       phoneNumber:phone,
     }
 
-    axios.delete(`http://localhost:5013/User`,data).then((res)=>{
+    axios.delete(`http://localhost:5013/User?UserId=${profileInfo?.data?.userId}`,data).then((res)=>{
       
-      if(res.status===200)  navigate("/");
+      if(res.status===200){  
+        setCookie("name","");
+        setCookie("role","");
+        setCookie("id","");
+        navigate("/");
+      }
 
     }).catch((err)=>{
       console.log(err);
@@ -80,6 +85,8 @@ const UserProfile = () => {
   const logout=()=>{
 
     setCookie('name',"");
+    setCookie("role","");
+    setCookie("id","")
     navigate("/");
     
   }
