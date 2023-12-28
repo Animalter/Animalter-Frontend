@@ -23,7 +23,6 @@ const AdminPanel = () => {
   const [showPopup,setShowPopup]=useState(false);
   const [selectedId,setSelectedId]=useState("");
   const [adoptFilter,setAdoptFilter]=useState("");
-  const [data,setData]=useState();
 
     
   const personInfo = useGetUsersQuery();
@@ -33,7 +32,7 @@ const AdminPanel = () => {
   const notifyAdd = () => toast.success("Registry Added");
   const notifyUpdate = () => toast.success("Registry Updated");
   const notifyDelete = () => toast.success("Registry Deleted");
-  const notifyError = () => toast.success("Operation Failed Try Again");
+  const notifyError = () => toast.error("Operation Failed Try Again");
 
   const [name,setName]=useState("");
   const [password,setPassword]=useState("");
@@ -48,6 +47,8 @@ const AdminPanel = () => {
   const [adoptState,setAdoptState]=useState("");
   const [gender,setGender]=useState("");
   const [about,setAbout]=useState();
+
+  console.log(about);
 
 
   const changeName=(value)=>{  setName(value);  }
@@ -84,6 +85,8 @@ const AdminPanel = () => {
     setAdoptState("");
     setGender("");
     setAbout("");
+
+    setSelectedId("");
   }
 
   const adoptStates=[
@@ -167,6 +170,7 @@ const AdminPanel = () => {
         //setAdoptState(res.data.adoptState)
         setGender(res.data.animalGender)
         setAbout(res.data.animalAbout)
+        setSelectedId(res.data.animalId);
         setShowPopup(true);
       }else{
         setName(res.data.userName)
@@ -174,44 +178,65 @@ const AdminPanel = () => {
         setEmail(res.data.mail)
         setPhone(res.data.phoneNumber)
         setShowPopup(true);
+        setSelectedId(res.data.userId);
       }
     })
 
   }
 
-  const updateData=(id)=>{
 
-    const url=`/url/${id}`
+  const updateData=()=>{
+
+    const personUrl=`http://localhost:5013/User`
+    const animalUrl=`http://localhost:5013/Animal`
     let data;
+    let url;
 
     const animalData={
-      Id:id,
-      Name:animalName,
-      Type:type,
-      Genus:genus,
-      Age:age,
-      Image:image,
-      AdoptState:adoptState,
+     
+      animalId: selectedId,
+      genusId: 1,
+      animalName:animalName,
+      animalAgeYear: age,
+      animalAgeMouth: 0,
+      animalAbout: about,
+      animaiImageUrl: image,
+      animalGender: gender,
+      
+      //Type:type,
+      //Genus:genus,
+      //AdoptState:adoptState,
 
     }
 
     const personData={
-      Id:id,
-      Name:name,
-      Password:password,
-      Email:email,
-      Phone:phone,
-      Role:selectedTab
+      
+      userId: selectedId,
+      roleId:1,
+      userName: name,
+      userPassword: password,
+      mail: email,
+      phoneNumber: phone,
+      
+      //Role:selectedTab
 
     }
 
-    if(operationType=="animal") data=animalData 
-    else data=personData
+    if(selectedTab=="animal"){
+      data=animalData 
+      url=animalUrl
+    }else{
+      data=personData
+      url=personUrl
+
+    } 
+
+    console.log(url)
+    console.log(data);
 
     axios.put(url,data).then(()=>{
 
       notifyUpdate();
-      showData();
       resetStates();
       setShowPopup(false);
 
@@ -303,13 +328,13 @@ const AdminPanel = () => {
           
         </div>
 
-        {(selectedTab=="user" ) && (
+        {selectedTab=="user" && (
 
-        <form action="" className='flex flex-col gap-3'>
+        <form action='' className='flex flex-col gap-3'>
             
           <input required type="text" id={id+'name'} value={name} onChange={(e)=>changeName(e.target.value)} placeholder='Enter Name' className='px-3 py-1 rounded-full border border-black outline-none'/>          
                        
-          <input required type="password" name="" id={id+'password'} value={password} onChange={(e)=>changePassword(e.target.value)} placeholder='Enter Password' className='px-3 py-1 rounded-full border border-black outline-none' />
+          <input required type="password" id={id+'password'} value={password} onChange={(e)=>changePassword(e.target.value)} placeholder='Enter Password' className='px-3 py-1 rounded-full border border-black outline-none' />
 
           <input required type="email" id={id+'email'} value={email} onChange={(e)=>changeEmail(e.target.value)} placeholder='Enter Email' className='px-3 py-1 rounded-full border border-black outline-none'/>
 
@@ -317,7 +342,7 @@ const AdminPanel = () => {
 
           <div>
               
-            <button className='w-1/2 p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]' onClick={()=>updateData(selectedId)}>Update Person</button>  
+            <button className='w-1/2 p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]' onClick={(e)=>{e.preventDefault();updateData()}}>Update Person</button>  
               
             <button className='w-1/2 p-2 rounded-full text-white bg-[#FF566A] border border-white hover:border-[#FF566A]' onClick={()=>deleteData(selectedId)}>Delete Person</button> 
           </div>
@@ -346,7 +371,7 @@ const AdminPanel = () => {
                     getOptionValue={(option) => option.value}  onChange={onChange} placeholder={adoptState || "Select State"} 
                     className="xs:w-1/2 lg:w-48 text-black rounded-lg border border-black"/>
 
-            <input required type="textarea" id={id+'about'} value={about} onChange={(e)=>setAbout(e.target.value)} placeholder="Write Animal About" className='px-3 py-1 rounded-full border border-black outline-none'/>   
+            <input required type="text" id={id+'about'} value={about} onChange={(e)=>setAbout(e.target.value)} placeholder="Write Animal About" className='px-3 py-1 rounded-full border border-black outline-none'/>   
             
             <input required style={{ display: "none" }} type="file" id={id+'image'} value={image} onChange={(e)=>changeImage(e.target.value)} placeholder="Enter Animal's Image" />
             <label htmlFor={id+'image'} className='flex gap-3 items-center '>
@@ -356,7 +381,7 @@ const AdminPanel = () => {
           
             <div>
               
-              <button className='w-1/2 p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]' onClick={()=>updateData(selectedId)}>Update Animal</button>  
+              <button className='w-1/2 p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]' onClick={()=>updateData()}>Update Animal</button>  
               
               <button className='w-1/2 p-2 rounded-full text-white bg-[#FF566A] border border-white hover:border-[#FF566A]' onClick={()=>deleteData(selectedId)}>Delete Animal</button> 
             </div>
@@ -382,7 +407,7 @@ const AdminPanel = () => {
 
         {(operationType=="user") && (
 
-        <form action="" onSubmit={(e)=>register(e)} className='flex flex-col gap-3'>
+        <form action="" className='flex flex-col gap-3'>
             
           <input required type="text" id={id+'name'} value={name} onChange={(e)=>changeName(e.target.value)} placeholder='Enter Name' className='px-3 py-1 rounded-full border border-black outline-none'/>          
                        
@@ -418,7 +443,7 @@ const AdminPanel = () => {
                     getOptionValue={(option) => option.value}  onChange={onChange} placeholder={adoptState || "Select State"} 
                     className="xs:w-1/2 lg:w-48 text-black rounded-lg border border-black"/>
 
-            <input required type="textarea" id={id+'about'} value={about} onChange={(e)=>setAbout(e.target.value)} placeholder="Write Animal About" className='px-3 py-1 rounded-full border border-black outline-none'/> 
+            <input required type="text" id={id+'about'} value={about} onChange={(e)=>setAbout(e.target.value)} placeholder="Write Animal About" className='px-3 py-1 rounded-full border border-black outline-none'/> 
                     
             <input required style={{ display: "none" }} type="file" id={id+'image'} value={image} onChange={(e)=>changeImage(e.target.value)} placeholder="Enter Animal's Image" />
             <label htmlFor={id+'image'} className='flex gap-3 items-center '>

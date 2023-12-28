@@ -23,6 +23,7 @@ function App() {
     //update redux and createApi post section
     //fake data 
     //siteyi canlıya alma ?
+    //forgot password page
     
 
     return (

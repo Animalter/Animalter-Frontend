@@ -5,6 +5,9 @@ import { useCookies } from 'react-cookie';
 
 const LoginPage = () => {
 
+  //yeni şifreyi mail ile gönderme
+  //şifreyi postlama işlemi
+
   const id=useId();
   const navigate=useNavigate();
   const [cookie,setCookie]=useCookies(["name"]);
@@ -17,7 +20,7 @@ const LoginPage = () => {
   const changePassword=(value)=>{  setPassword(value);  }
 
 
-  const login=(e)=>{
+  const login=()=>{
 
     const data={
       Name:name,
@@ -28,7 +31,8 @@ const LoginPage = () => {
       setCookie('name',name);
       //setCookie('id',res.id);
       //setCookie('role',res.role);
-      //token ?  id ve role değerinin get ile alınması (res ile döndürülebilir mi)
+      //setCookie('name',res.name)
+      
       navigate("/");
     }).catch((err)=>{
       console.log(err);
@@ -43,15 +47,16 @@ const LoginPage = () => {
 
       <div className=''>
 
-        <form action="" onSubmit={(e)=>login(e)} className='flex flex-col gap-3'>
+        <form action="" className='flex flex-col gap-3'>
               
           <input required type="text" id={id+'name'} value={name} onChange={(e)=>changeName(e.target.value)} placeholder='Enter Your Name or Email' className='px-3 py-1 rounded-full border border-black outline-none'/>          
                          
           <input required type="password" name="" id={id+'password'} value={password} onChange={(e)=>changePassword(e.target.value)}  placeholder='Enter Your Password' className='px-3 py-1 rounded-full border border-black outline-none' />
 
-          <button onClick={login} className='w-full p-2 rounded-full text-white bg-[#009D69] border border-white hover:border-[#009D69]'>Login</button>
+          <button onClick={()=>login()} className='w-full p-2 rounded-full text-white bg-[#009D69] border border-white hover:border-[#009D69]'>Login</button>
 
           <p className='text-white'>Do You Have Account ? <Link to="/register" className='font-bold' >Register</Link></p>
+          <Link to="/forgotpassword" className='font-bold' >I Forgot My Password</Link>
 
         </form>
 

@@ -24,7 +24,7 @@ const AnimalDetailsPage = () => {
   
 
   const notifyAdopt = () => toast.success("We received your adopt request. We contact you as soon as possible");
-  const notifyError = () => toast.success("Operation failed. Try again");
+  const notifyError = () => toast.error("Operation failed. Try again");
 
   const adoptAnimal=(animalid,userid)=>{
     if(!cookie.name){ 

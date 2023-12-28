@@ -11,7 +11,8 @@ const RegisterPage = () => {
   const id=useId();
   const navigate=useNavigate();
 
-  const notifyError = () => toast.success("Operation Failed Try Again");
+  const notifyError = () => toast.error("Operation Failed Try Again");
+  const notifySuccess=()=>toast.success("Registred");
 
   const [name,setName]=useState("");
   const [password,setPassword]=useState("");
@@ -29,14 +30,22 @@ const RegisterPage = () => {
   const register=()=>{
 
     const data={
-      Name:name,
-      Password:password,
-      Email:email,
-      Phone:phone,
+      
+      roleId: 2,
+      userName: name,
+      userPassword: password,
+      mail: email,
+      phoneNumber: phone
+
     }
-    const url="/";
-    axios.post(url,data).then(()=>{
+    const url="http://localhost:8641/User/Customer_Register";
+    axios.post(url,data).then((res)=>{
+
+    if(res.status==200){
       navigate("/login");
+      notifySuccess();
+    }
+
     }).catch((err)=>{
       console.log(err);
       notifyError();
@@ -64,7 +73,7 @@ const RegisterPage = () => {
 
         <input required type="tel" id={id+'phone'} value={phone} onChange={(e)=>changePhone(e.target.value)} pattern='[0]{1}[5]{1}[0-9]{9}' placeholder='Enter Your Phone Number' className='px-3 py-1 rounded-full border border-black outline-none'/>
 
-        <button onClick={register} className='w-full p-2 rounded-full text-white bg-[#009D69] border border-white hover:border-[#009D69]'>Register</button>
+        <button onClick={()=>register()} className='w-full p-2 rounded-full text-white bg-[#009D69] border border-white hover:border-[#009D69]'>Register</button>
 
         <p className='text-white'>Do You Have Account ? <Link to="/login" className='font-bold' >Login</Link></p>
 
