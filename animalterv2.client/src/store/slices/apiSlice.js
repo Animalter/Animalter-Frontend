@@ -14,6 +14,8 @@ export const animalApi = createApi({
     getAnimals: builder.query({ query: () => `Animal` }),
     getUsers: builder.query({ query: () => `User` }),
     getUserById: builder.query({ query: (id) => `User/GetUserById?Id=${id}` }),
+    getMyAnimal: builder.query({ query: (id)=>`Animal/GetMyAllAnimal?UserId=${id}`}) ,
+    getAnimalImage: builder.query({ query: (file)=>`Image/imageName?imageName=${file}`}) 
     
   }),
 });
@@ -26,5 +28,7 @@ export const {
   useGetAnimalsQuery,
   useGetUsersQuery,
   useGetUserByIdQuery,
+  useGetMyAnimalQuery,
+  useGetAnimalImageQuery,
   
 } = animalApi;

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const AnimalTable = ({data,editData,state}) => {
   return (
-    <div>
+    <div className={`${state=="profile" ? 'w-full px-5':''}`}>
 
         <div className='flex justify-between border-b-2 border-black mb-5 pb-1'>
           <p className='w-1/5 font-semibold xs:text-sm md:text-md lg:text-lg'>Name</p>
@@ -13,7 +13,9 @@ const AnimalTable = ({data,editData,state}) => {
           <p className='font-semibold xs:text-sm md:text-md lg:text-lg'>Genus</p>
           <p className='font-semibold xs:text-sm md:text-md lg:text-lg'>Gender</p>
           <p className='font-semibold xs:text-sm md:text-md lg:text-lg'>Age</p>
+          {state=="admin" &&(
           <p className='font-semibold xs:text-sm md:text-md lg:text-lg'>Edit</p>
+          )}
         </div>
 
         {data && (

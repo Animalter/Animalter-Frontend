@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useGetUserByIdQuery } from '../store/slices/apiSlice';
+import { useGetMyAnimalQuery, useGetUserByIdQuery } from '../store/slices/apiSlice';
 import AnimalTable from '../components/AnimalTable';
 
 const UserProfile = () => {
@@ -12,6 +12,8 @@ const UserProfile = () => {
   const [showForm,setShowForm]=useState(false);
   const [deleteSection,setDeleteSection]=useState(false);
   const [showPassword,setShowPassword]=useState(false);
+
+ 
 
   const id=useId();
   const navigate=useNavigate();
@@ -21,7 +23,10 @@ const UserProfile = () => {
   const notifyUpdate = () => toast.success("Profile Info Updated");
 
   const profileInfo=useGetUserByIdQuery(params.id);
-  console.log(profileInfo);
+  const myAnimals=useGetMyAnimalQuery(profileInfo?.data?.userId);
+   
+  console.log(myAnimals);
+  
   
   const [name,setName]=useState(profileInfo?.data?.userName || "");
   const [password,setPassword]=useState(profileInfo?.data?.userPassword || "");
@@ -172,11 +177,11 @@ const UserProfile = () => {
 
       </div>
 
-      <div className='flex flex-col items-center xs:h-72 lg:h-screen xs:w-full lg:w-1/2'>
+      <div className='flex flex-col items-center xs:h-72 lg:h-screen xs:w-full lg:w-2/3'>
 
         <h3 className='font-bold xs:text-2xl md:text-3xl xs:mb-6 lg:mb-12'>Adopted Animals</h3>
 
-          <AnimalTable data={[]} state={"profile"} />
+          <AnimalTable data={myAnimals?.data} state={"profile"} />
         
       </div>     
       

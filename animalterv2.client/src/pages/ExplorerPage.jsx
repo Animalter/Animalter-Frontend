@@ -9,9 +9,6 @@ const ExplorerPage = () => {
   const animals=useGetAnimalsQuery();
   console.log(animals)
 
-  const [genus,setGenus]=useState("");
-  const [type,setType]=useState("");
-
 
 useEffect(()=>{
 
@@ -29,21 +26,8 @@ useEffect(()=>{
         
         animals?.data?.map((animal,i)=>{
 
-          
-          
-          axios.get(`http://localhost:5013/Genus/GetGenusById?Id=${animal.animalId}`).then((res)=>{
-            let genuss;
-          genuss=res.data.genuss
-          setGenus(genuss);
-          })
-          axios.get(`http://localhost:5013/Typee/GetTypeeById?Id=${animal.animalId}`).then((res)=>{
-            let typee;
-          typee=res.data.typeee
-          setType(typee);
-          })
-
           return(
-          <AnimalCard key={i} id={animal.animalId} name={animal.animalName} type={type} genus={genus} age={animal.animalAgeYear} image={animal.animaiImageUrl }/>
+          <AnimalCard key={i} id={animal.animalId} name={animal.animalName} type={animal.typeeId} genus={animal.genusId} age={animal.animalAgeYear} image={animal.animaiImageUrl}/>
           )
           })
       }
