@@ -62,9 +62,9 @@ const AnimalDetailsPage = () => {
 
           <div>      
             <h3 className='text-lg font-semibold capitalize'>{animalDetails?.data?.animalName}</h3>
-            <p className='capitalize'>type</p>
-            <p className='capitalize'>genus</p>
-            <p>{animalDetails?.data?.animalAgeYear} Year</p>
+            <p className='capitalize'>{animalDetails?.data?.typee}</p>
+            <p className='capitalize'>{animalDetails?.data?.genuss}</p>
+            <p>{animalDetails?.data?.animalAgeYear} Years, {animalDetails?.data?.animalAgeMouth} Months</p>
             <p className='capitalize'>{animalDetails?.data?.animalGender}</p>
 
           </div>

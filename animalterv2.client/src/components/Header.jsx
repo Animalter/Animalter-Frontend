@@ -9,7 +9,7 @@ import { useGetTypesQuery } from '../store/slices/apiSlice'
 const Header = () => {
 
   const [cookie,setCookie]=useCookies(['role','name','id']);
-  console.log(cookie.role);
+  
   const [mobileMenu,setMobileMenu]=useState(false);
 
   const types=useGetTypesQuery();

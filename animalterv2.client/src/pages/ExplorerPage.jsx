@@ -27,7 +27,7 @@ useEffect(()=>{
         animals?.data?.map((animal,i)=>{
 
           return(
-          <AnimalCard key={i} id={animal.animalId} name={animal.animalName} type={animal.typeeId} genus={animal.genusId} age={animal.animalAgeYear} image={animal.animaiImageUrl}/>
+          <AnimalCard key={i} id={animal.animalId} name={animal.animalName} type={animal.typeee} genus={animal.genuss} age={animal.animalAgeYear} image={animal.animaiImageUrl}/>
           )
           })
       }

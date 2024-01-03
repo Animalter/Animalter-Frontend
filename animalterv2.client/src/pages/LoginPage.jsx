@@ -32,12 +32,17 @@ const LoginPage = () => {
     }
     const url=`http://localhost:5013/Account/Login?UserName=${name}&Password=${password}`;
     axios.post(url,data).then((res)=>{
+
+      if(res.status==200){
       setCookie('name',res.data.userName);
       setCookie('id',res.data.userId);
       setCookie('role',res.data.roleId);
       console.log(res)
       
       navigate("/");
+      }else{
+        notifyError();
+      }
 
     }).catch((err)=>{
       console.log(err);

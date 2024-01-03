@@ -55,6 +55,7 @@ const UserProfile = () => {
     axios.put(url,data).then((res)=>{
       
       notifyUpdate();    
+      setCookie('name',name);
 
     }).catch((err)=>{
       console.log(err);

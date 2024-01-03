@@ -22,9 +22,10 @@ function App() {
 
     //infinite scroll ?
     //update redux and createApi post section
-    //fake data 
+    //filter animals
     //siteyi canlıya alma ?
-    //forgot password page
+    
+    
     
 
     return (
