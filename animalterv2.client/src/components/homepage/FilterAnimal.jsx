@@ -3,34 +3,17 @@ import { useNavigate } from 'react-router-dom';
 
 const FilterAnimal = () => {
 
-  //hangi url ile gönderilecek
-  //gelen veri diğer sayfaya nasıl gidecek
-
   const id=useId();
   const navigate=useNavigate();
 
-  const [name,setName]=useState();
-  const [type,setType]=useState();
-  const [genus,setGenus]=useState();
-  const [age,setAge]=useState();
+  const [type,setType]=useState("");
+  const [genus,setGenus]=useState("");
+  const [age,setAge]=useState("");
 
 
   const handleSubmit=()=>{
 
-    //const data={
-    //  Name:name,
-    //  Type:type,
-    //  Genus:genus,
-    //  Age:age,
-    //}
-    //const url="/";
-    //axios.post(url,data).then(()=>{
-
-      navigate(`/search/${name}-${type}-${genus}-${age}`)
-    //}).catch((err)=>{
-    //  console.log(err);
-    //});
-
+    navigate(`/search/${type}-${genus}-${age}`)
      
   }
 
@@ -40,11 +23,6 @@ const FilterAnimal = () => {
      <h2 className='text-xl text-white underline underline-offset-8 font-semibold '>Detailed Search</h2>
 
      <form action="" className='flex flex-col items-end lg:w-1/3 xs:mt-10 lg:mt-20 '>
-
-      <div className='mb-6 flex gap-5'>
-        <label htmlFor={id+'name'} className='font-bold text-white '>Name</label>
-        <input type="text" id={id+'name'} value={name} onChange={(e)=>setName(e.target.value)} className='rounded-lg outline-none px-1 py-0.5'/>
-      </div>
 
       <div className='mb-6 flex gap-7'>
         <label htmlFor={id+'type'} className='font-bold text-white '>Type</label>

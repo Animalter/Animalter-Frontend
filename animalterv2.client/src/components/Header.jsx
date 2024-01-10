@@ -32,7 +32,7 @@ const Header = () => {
       <nav className='xs:hidden lg:flex gap-5'>
 
         {types?.data?.map((e,i)=>(
-          <NavLink key={i} to={`animal/${e.typeee}-${e.typeId}` }className={({ isActive }) => isActive ? 'text-black ' : 'hover:underline underline-offset-4'}>{e.typeee}</NavLink>
+          <NavLink key={i} to={`animal/${e.typeee}-${e.typeeId}` }className={({ isActive }) => isActive ? 'text-black ' : 'hover:underline underline-offset-4'}>{e.typeee}</NavLink>
         ))}
 
         

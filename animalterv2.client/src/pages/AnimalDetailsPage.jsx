@@ -74,7 +74,7 @@ const AnimalDetailsPage = () => {
             <p>{animalDetails?.data?.animalAbout}</p>
           </div>
 
-          <button disabled={"animal.adopt=='adopted' "} onClick={()=>adoptAnimal("animal.id","user.id")} className='w-full text-white p-2 border border-white bg-[#009D69] rounded-full hover:border-[#009D69]'>Adopt</button>
+          <button disabled={animalDetails?.data?.adoptionState=='adopted'} onClick={()=>adoptAnimal("animal.id","user.id")} className='w-full text-white p-2 border border-white bg-[#009D69] rounded-full hover:border-[#009D69]'>Adopt</button>
           
         </div>
 

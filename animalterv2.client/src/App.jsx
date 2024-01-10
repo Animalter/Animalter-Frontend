@@ -22,11 +22,10 @@ function App() {
 
     //infinite scroll ?
     //update redux and createApi post section
-    //filter animals
+    //filter animals (all required ?)
+    //filter operation return null
     //siteyi canlıya alma ?
-    
-    
-    
+
 
     return (
         <div>

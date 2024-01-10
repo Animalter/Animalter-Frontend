@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useId, useState } from 'react'
 import Select from "react-select"
 import axios from "axios";
 
-const UpdateForm = ({selectedTab,notifyDelete,notifyUpdate,notifyError,selectedId,setSelectedId,adoptStates}) => {
+const UpdateForm = ({selectedTab,notifyDelete,notifyUpdate,notifyError,selectedId,setSelectedId,adoptStates,setShowPopup}) => {
 
   const id=useId();
 
@@ -92,16 +92,18 @@ const UpdateForm = ({selectedTab,notifyDelete,notifyUpdate,notifyError,selectedI
 
     axios.get(url).then((res)=>{
 
+      console.log(res);
+
       if(selectedTab=="animal"){
-        setAnimalName(res.data.animalName);
-        setType(res.data.typeee);
-        setGenus(res.data.genuss);
-        setAge(res.data.animalAgeYear)
-        setAgeMonth(res.data.animalAgeMouth)
-        setAdoptState(res.data.adoptionState)
-        setGender(res.data.animalGender)
-        setAbout(res.data.animalAbout)
-        setSelectedId(res.data.animalId);
+        setAnimalName(res.data[0].animalName);
+        setType(res.data[0].typeee);
+        setGenus(res.data[0].genuss);
+        setAge(res.data[0].animalAgeYear)
+        setAgeMonth(res.data[0].animalAgeMouth)
+        setAdoptState(res.data[0].adoptionState)
+        setGender(res.data[0].animalGender)
+        setAbout(res.data[0].animalAbout)
+        setSelectedId(res.data[0].animalId);
       }else{
         setName(res.data.userName)
         setPassword(res.data.userPassword)
@@ -127,6 +129,7 @@ const UpdateForm = ({selectedTab,notifyDelete,notifyUpdate,notifyError,selectedI
       animalId: selectedId,
       typeee:type,
       genuss: genus,
+      genusId:1,
       animalName:animalName,
       animalAgeYear: age,
       animalAgeMouth: ageMonth,
@@ -226,7 +229,7 @@ const UpdateForm = ({selectedTab,notifyDelete,notifyUpdate,notifyError,selectedI
               
             <button className='w-1/2 p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]' onClick={(e)=>{e.preventDefault();updateData()}}>Update Person</button>  
               
-            <button className='w-1/2 p-2 rounded-full text-white bg-[#FF566A] border border-white hover:border-[#FF566A]' onClick={()=>deleteData(selectedId)}>Delete Person</button> 
+            <button className='w-1/2 p-2 rounded-full text-white bg-[#FF566A] border border-white hover:border-[#FF566A]' onClick={()=>deleteData()}>Delete Person</button> 
           </div>
 
         </form>
@@ -265,9 +268,9 @@ const UpdateForm = ({selectedTab,notifyDelete,notifyUpdate,notifyError,selectedI
           
             <div>
               
-              <button className='w-1/2 p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]' onClick={()=>updateData()}>Update Animal</button>  
+              <button className='w-1/2 p-2 rounded-full text-white bg-[#B5179E] border border-white hover:border-[#B5179E]' onClick={(e)=>{e.preventDefault();updateData()}}>Update Animal</button>  
               
-              <button className='w-1/2 p-2 rounded-full text-white bg-[#FF566A] border border-white hover:border-[#FF566A]' onClick={()=>deleteData(selectedId)}>Delete Animal</button> 
+              <button className='w-1/2 p-2 rounded-full text-white bg-[#FF566A] border border-white hover:border-[#FF566A]' onClick={()=>deleteData()}>Delete Animal</button> 
             </div>
                 
 

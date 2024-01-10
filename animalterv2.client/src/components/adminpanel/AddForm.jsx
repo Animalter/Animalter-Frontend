@@ -2,7 +2,7 @@ import React, { Fragment, useId, useState } from 'react'
 import Select from "react-select"
 import axios from 'axios';
 
-const AddForm = ({notifyAdd,notifyError,operationType,adoptStates}) => {
+const AddForm = ({notifyAdd,notifyError,operationType,adoptStates,setSelectedId}) => {
 
   const id=useId();
 

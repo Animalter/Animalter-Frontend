@@ -100,7 +100,7 @@ const AdminPanel = () => {
           
         </div>
 
-          <UpdateForm selectedTab={selectedTab} adoptStates={adoptStates} notifyDelete={notifyDelete} notifyUpdate={notifyUpdate} notifyError={notifyError} selectedId={selectedId} setSelectedId={setSelectedId}/>
+          <UpdateForm selectedTab={selectedTab} adoptStates={adoptStates} notifyDelete={notifyDelete} notifyUpdate={notifyUpdate} notifyError={notifyError} selectedId={selectedId} setSelectedId={setSelectedId} setShowPopup={setShowPopup}/>
 
         </div>
 
@@ -117,7 +117,7 @@ const AdminPanel = () => {
 
         </div>
 
-        <AddForm operationType={operationType} notifyAdd={notifyAdd} notifyError={notifyError} adoptStates={adoptStates}/>
+        <AddForm operationType={operationType} notifyAdd={notifyAdd} notifyError={notifyError} adoptStates={adoptStates} setSelectedId={setSelectedId}/>
 
       </div>
 
