@@ -4,7 +4,7 @@ import Select from "react-select"
 import { useCookies } from 'react-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useGetAnimalsQuery, useGetUsersQuery } from '../store/slices/apiSlice';
+import { useGetAnimalsQuery, useGetGenusQuery, useGetTypesQuery, useGetUsersQuery } from '../store/slices/apiSlice';
 import AnimalTable from '../components/AnimalTable';
 import PersonTable from '../components/adminpanel/PersonTable';
 import UpdateForm from '../components/adminpanel/UpdateForm';
@@ -26,6 +26,8 @@ const AdminPanel = () => {
     
   const personInfo = useGetUsersQuery();
   const animalInfo=useGetAnimalsQuery();
+  const types=useGetTypesQuery();
+  const genuses=useGetGenusQuery();
    
 
   const notifyAdd = () => toast.success("Registry Added");
@@ -100,7 +102,7 @@ const AdminPanel = () => {
           
         </div>
 
-          <UpdateForm selectedTab={selectedTab} adoptStates={adoptStates} notifyDelete={notifyDelete} notifyUpdate={notifyUpdate} notifyError={notifyError} selectedId={selectedId} setSelectedId={setSelectedId} setShowPopup={setShowPopup}/>
+          <UpdateForm selectedTab={selectedTab} adoptStates={adoptStates} notifyDelete={notifyDelete} notifyUpdate={notifyUpdate} notifyError={notifyError} selectedId={selectedId} setSelectedId={setSelectedId} setShowPopup={setShowPopup} types={types} genuses={genuses}/>
 
         </div>
 
@@ -117,7 +119,7 @@ const AdminPanel = () => {
 
         </div>
 
-        <AddForm operationType={operationType} notifyAdd={notifyAdd} notifyError={notifyError} adoptStates={adoptStates} setSelectedId={setSelectedId}/>
+        <AddForm operationType={operationType} notifyAdd={notifyAdd} notifyError={notifyError} adoptStates={adoptStates} setSelectedId={setSelectedId} types={types} genuses={genuses}/>
 
       </div>
 

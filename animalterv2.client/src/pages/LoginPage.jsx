@@ -67,7 +67,6 @@ const LoginPage = () => {
           <button onClick={(e)=>{e.preventDefault();login()}} className='w-full p-2 rounded-full text-white bg-[#009D69] border border-white hover:border-[#009D69]'>Login</button>
 
           <p className='text-white'>Do You Have Account ? <Link to="/register" className='font-bold' >Register</Link></p>
-          <Link to="/forgotpassword" className='font-semibold text-white underline' >I Forgot My Password</Link>
 
         </form>
 

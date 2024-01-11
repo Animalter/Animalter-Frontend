@@ -8,6 +8,7 @@ export const animalApi = createApi({
 
   endpoints: (builder) => ({
     getTypes: builder.query({ query: () => 'Typee' }),
+    getGenus: builder.query({ query: () => `Genus`}),
     getAnimalById: builder.query({ query: (id) => `Animal/GetAnimalById?Id=${id}` }),
     getAnimalByType: builder.query({ query: (type) => `v1/charts/country?country_code=${type}` }),
     getAnimalByGenus: builder.query({ query: (genus) => `v1/search/multi?search_type=SONGS_ARTISTS&query=${genus}` }),
@@ -24,6 +25,7 @@ export const animalApi = createApi({
 
 export const {
   useGetTypesQuery,
+  useGetGenusQuery,
   useGetAnimalByIdQuery,
   useGetAnimalByTypeQuery,
   useGetAnimalByGenusQuery,

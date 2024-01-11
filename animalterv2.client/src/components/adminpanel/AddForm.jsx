@@ -2,7 +2,7 @@ import React, { Fragment, useId, useState } from 'react'
 import Select from "react-select"
 import axios from 'axios';
 
-const AddForm = ({notifyAdd,notifyError,operationType,adoptStates,setSelectedId}) => {
+const AddForm = ({notifyAdd,notifyError,operationType,adoptStates,setSelectedId,types,genuses}) => {
 
   const id=useId();
 
@@ -14,7 +14,9 @@ const AddForm = ({notifyAdd,notifyError,operationType,adoptStates,setSelectedId}
   
   const [animalName,setAnimalName]=useState("");
   const [type,setType]=useState("");
+  const [typeId,setTypeId]=useState("");
   const [genus,setGenus]=useState("");
+  const [genusId,setGenusId]=useState("");
   const [age,setAge]=useState();
   const [ageMonth,setAgeMonth]=useState("");
   const [image,setImage]=useState("");
@@ -52,14 +54,34 @@ const AddForm = ({notifyAdd,notifyError,operationType,adoptStates,setSelectedId}
 
     setAnimalName("");
     setType("");
+    setTypeId("");
     setGenus("");
+    setGenusId("");
     setAge("");
+    setAgeMonth("");
     setImage("");
     setAdoptState("");
     setGender("");
     setAbout("");
 
     setSelectedId("");
+  }
+  
+
+  const onChangeType=(selectedOption)=>{
+
+    
+    setTypeId(selectedOption.typeeId);
+    setType(selectedOption.typeee);
+
+  }
+
+  const onChangeGenus=(selectedOption)=>{
+
+    
+    setGenusId(selectedOption.genusId);
+    setGenus(selectedOption.genuss);
+
   }
 
   const onChangeGender = (selectedOption) => {
@@ -91,15 +113,15 @@ const AddForm = ({notifyAdd,notifyError,operationType,adoptStates,setSelectedId}
     const animalData={
       animalName:animalName,
       typeee:type,
+      typeeId:typeId,
       genuss:genus,
+      genusId:genusId,
       animalAgeYear:age,
       animalAgeMouth:ageMonth,
       animaiImageUrl:"image",
       adoptionState:adoptState,
       animalGender:gender,
       animalAbout:about,
-      typeeId: 2,
-      genusId: 1,
       adoptionStatusId: 0,
 
     }
@@ -166,9 +188,13 @@ const AddForm = ({notifyAdd,notifyError,operationType,adoptStates,setSelectedId}
     
               <input required type="text" id={id+'animalName'} value={animalName} onChange={(e)=>changeAnimalName(e.target.value)} placeholder="Enter Animal's Name" className='px-3 py-1 rounded-full border border-black outline-none'/>          
 
-              <input required type="text" id={id+'type'} value={type} onChange={(e)=>changeType(e.target.value)} placeholder="Enter Animal's Type" className='px-3 py-1 rounded-full border border-black outline-none'/>          
+              <Select name="type" value={typeId} options={types?.data} getOptionLabel={(option) => option?.typeee} 
+                      getOptionValue={(option) => option?.typeeId}  onChange={onChangeType} placeholder={type || "Select Type"} 
+                      className="xs:w-1/2 lg:w-48 text-black rounded-lg border border-black"/>
 
-              <input required type="text" id={id+'genus'} value={genus} onChange={(e)=>changeGenus(e.target.value)} placeholder="Enter Animal's Genus" className='px-3 py-1 rounded-full border border-black outline-none'/>          
+              <Select name="genus" value={genusId} options={genuses?.data} getOptionLabel={(option) => option?.genuss} 
+                      getOptionValue={(option) => option?.genusId}  onChange={onChangeGenus} placeholder={genus || "Select Genus"} 
+                      className="xs:w-1/2 lg:w-48 text-black rounded-lg border border-black"/>
 
               <input required type="text" id={id+'age'} value={age} onChange={(e)=>changeAge(e.target.value)} placeholder="Enter Animal's Age" className='px-3 py-1 rounded-full border border-black outline-none'/>          
    

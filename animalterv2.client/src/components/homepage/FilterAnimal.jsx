@@ -1,19 +1,42 @@
 import React, { useId, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import Select from "react-select"
+import { useGetGenusQuery, useGetTypesQuery } from '../../store/slices/apiSlice';
 
 const FilterAnimal = () => {
 
   const id=useId();
   const navigate=useNavigate();
 
+  const types=useGetTypesQuery();
+  const genuses=useGetGenusQuery();
+
   const [type,setType]=useState("");
+  const [typeId,setTypeId]=useState("");
   const [genus,setGenus]=useState("");
+  const [genusId,setGenusId]=useState("");
   const [age,setAge]=useState("");
+
+  const onChangeType=(selectedOption)=>{
+
+    
+    setTypeId(selectedOption.typeeId);
+    setType(selectedOption.typeee);
+
+  }
+
+  const onChangeGenus=(selectedOption)=>{
+
+    
+    setGenusId(selectedOption.genusId);
+    setGenus(selectedOption.genuss);
+
+  }
 
 
   const handleSubmit=()=>{
 
-    navigate(`/search/${type}-${genus}-${age}`)
+    navigate(`/search/${typeId}-${genusId}-${age}`)
      
   }
 
@@ -22,22 +45,19 @@ const FilterAnimal = () => {
       
      <h2 className='text-xl text-white underline underline-offset-8 font-semibold '>Detailed Search</h2>
 
-     <form action="" className='flex flex-col items-end lg:w-1/3 xs:mt-10 lg:mt-20 '>
+     <form action="" className='flex flex-col items-end lg:w-1/3 lg:gap-8 xs:mt-10 lg:mt-20 '>
 
-      <div className='mb-6 flex gap-7'>
-        <label htmlFor={id+'type'} className='font-bold text-white '>Type</label>
-        <input type="text" id={id+'type'} value={type} onChange={(e)=>setType(e.target.value)} placeholder='Dog, Cat, Bird, Fish etc.' className='rounded-lg outline-none px-1 py-0.5'/>
-      </div>
+      <Select name="type" value={typeId} options={types?.data} getOptionLabel={(option) => option?.typeee} 
+                      getOptionValue={(option) => option?.typeeId}  onChange={onChangeType} placeholder={type || "Select Type"} 
+                      className="xs:w-1/2 lg:w-72 text-black rounded-lg border border-black"/>
 
-      <div className='mb-6 flex gap-4'>
-        <label htmlFor={id+'genus'} className='font-bold text-white '>Genus</label>
-        <input type="text" id={id+'genus'} value={genus} onChange={(e)=>setGenus(e.target.value)} placeholder='British, Golden etc.' className='rounded-lg outline-none px-1 py-0.5'/>
-      </div>
+      <Select name="genus" value={genusId} options={genuses?.data} getOptionLabel={(option) => option?.genuss} 
+                      getOptionValue={(option) => option?.genusId}  onChange={onChangeGenus} placeholder={genus || "Select Genus"} 
+                      className="xs:w-1/2 lg:w-72 text-black rounded-lg border border-black "/>
 
-      <div className='mb-6 flex gap-8'>
-        <label htmlFor={id+'age'} className='font-bold text-white'>Age</label>
-        <input type="text" id={id+'age'} value={age} onChange={(e)=>setAge(e.target.value)} className='rounded-lg outline-none px-1 py-0.5'/>
-      </div>
+      
+        <input type="text" id={id+'age'} value={age} placeholder="Enter Animal's Age" onChange={(e)=>setAge(e.target.value)} className='lg:w-72 rounded-lg outline-none px-2 py-1.5'/>
+      
 
       <button onClick={handleSubmit} className='xs:w-full lg:w-3/4 px-2 py-1 bg-[#009D69] rounded-full text-white border border-white hover:border-[#009D69]'>Search</button>
 

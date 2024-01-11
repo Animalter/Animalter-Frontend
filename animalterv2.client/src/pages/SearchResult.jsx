@@ -21,7 +21,7 @@ const SearchResult = () => {
   },[])
 
   return (
-    <div className='my-16 lg:w-3/4 mx-auto'>
+    <div className='my-16 lg:w-3/4 mx-auto flex gap-10 flex-wrap'>
       
       {
         result?.data?.map((animal,i)=>(

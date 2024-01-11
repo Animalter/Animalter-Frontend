@@ -30,9 +30,9 @@ const AnimalType = () => {
 
         ):(
 
-          //animals.data.map((animal)=>(
-            <AnimalCard name={"name"} type={"type"} genus={"genus"} age={"age"} image={Example} id={"1"}/>
-          //))
+          filteredAnimals.data.map((animal,i)=>(
+            <AnimalCard key={i} name={animal.animalName} type={animal.typeee} genus={animal.genuss} image={animal.animaiImageUrl} age={animal.animalAgeYear} id={animal.animalId}/>
+          ))
 
         )}
       </div>

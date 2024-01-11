@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useId, useState } from 'react'
 import Select from "react-select"
 import axios from "axios";
 
-const UpdateForm = ({selectedTab,notifyDelete,notifyUpdate,notifyError,selectedId,setSelectedId,adoptStates,setShowPopup}) => {
+const UpdateForm = ({selectedTab,notifyDelete,notifyUpdate,notifyError,selectedId,setSelectedId,adoptStates,setShowPopup,types,genuses}) => {
 
   const id=useId();
 
@@ -14,7 +14,9 @@ const UpdateForm = ({selectedTab,notifyDelete,notifyUpdate,notifyError,selectedI
   
   const [animalName,setAnimalName]=useState("");
   const [type,setType]=useState("");
+  const [typeId,setTypeId]=useState("");
   const [genus,setGenus]=useState("");
+  const [genusId,setGenusId]=useState("");
   const [age,setAge]=useState();
   const [ageMonth,setAgeMonth]=useState("");
   const [image,setImage]=useState("");
@@ -62,6 +64,22 @@ const UpdateForm = ({selectedTab,notifyDelete,notifyUpdate,notifyError,selectedI
     setSelectedId("");
   }
 
+  const onChangeType=(selectedOption)=>{
+
+    
+    setTypeId(selectedOption.typeeId);
+    setType(selectedOption.typeee);
+
+  }
+
+  const onChangeGenus=(selectedOption)=>{
+
+    
+    setGenusId(selectedOption.genusId);
+    setGenus(selectedOption.genuss);
+
+  }
+
   const onChangeGender = (selectedOption) => {
  
     setGender(selectedOption.value);  
@@ -97,7 +115,9 @@ const UpdateForm = ({selectedTab,notifyDelete,notifyUpdate,notifyError,selectedI
       if(selectedTab=="animal"){
         setAnimalName(res.data[0].animalName);
         setType(res.data[0].typeee);
+        setTypeId(res.data[0].typeeId);
         setGenus(res.data[0].genuss);
+        setGenusId(res.data[0].genusId);
         setAge(res.data[0].animalAgeYear)
         setAgeMonth(res.data[0].animalAgeMouth)
         setAdoptState(res.data[0].adoptionState)
@@ -128,15 +148,17 @@ const UpdateForm = ({selectedTab,notifyDelete,notifyUpdate,notifyError,selectedI
      
       animalId: selectedId,
       typeee:type,
+      typeeId:typeId,
       genuss: genus,
-      genusId:1,
+      genusId:genusId,
       animalName:animalName,
       animalAgeYear: age,
       animalAgeMouth: ageMonth,
       animalAbout: about,
       animaiImageUrl: image,
       animalGender: gender,
-      adoptionState:adoptState
+      adoptionState:adoptState,
+      userId:null,
 
     }
 
@@ -189,7 +211,6 @@ const UpdateForm = ({selectedTab,notifyDelete,notifyUpdate,notifyError,selectedI
       if(res.status===200){
         
         notifyDelete();
-        showData();
         resetStates();
         setShowPopup(false);
       }
@@ -242,9 +263,13 @@ const UpdateForm = ({selectedTab,notifyDelete,notifyUpdate,notifyError,selectedI
             
             <input required type="text" id={id+'animalName'} value={animalName} onChange={(e)=>changeAnimalName(e.target.value)} placeholder="Enter Animal's Name" className='px-3 py-1 rounded-full border border-black outline-none'/>          
 
-            <input required type="text" id={id+'type'} value={type} onChange={(e)=>changeType(e.target.value)} placeholder="Enter Animal's Type" className='px-3 py-1 rounded-full border border-black outline-none'/>          
+            <Select name="type" value={typeId} options={types?.data} getOptionLabel={(option) => option?.typeee} 
+                      getOptionValue={(option) => option?.typeeId}  onChange={onChangeType} placeholder={type || "Select Type"} 
+                      className="xs:w-1/2 lg:w-48 text-black rounded-lg border border-black"/>
 
-            <input required type="text" id={id+'genus'} value={genus} onChange={(e)=>changeGenus(e.target.value)} placeholder="Enter Animal's Genus" className='px-3 py-1 rounded-full border border-black outline-none'/>          
+            <Select name="genus" value={genusId} options={genuses?.data} getOptionLabel={(option) => option?.genuss} 
+                      getOptionValue={(option) => option?.genusId}  onChange={onChangeGenus} placeholder={genus || "Select Genus"} 
+                      className="xs:w-1/2 lg:w-48 text-black rounded-lg border border-black"/>
 
             <input required type="text" id={id+'age'} value={age} onChange={(e)=>changeAge(e.target.value)} placeholder="Enter Animal's Age" className='px-3 py-1 rounded-full border border-black outline-none'/>   
             
